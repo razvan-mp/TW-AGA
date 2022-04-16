@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "utf-8">
+        <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+        <title>Slider</title>
+        <link rel = "stylesheet" href="style.css">
+        <link rel = "stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    </head>
+    <body>
+        <div class = "slider">
+            <div class = "slide active">
+                <img src = "a.jpg" alt = "404">
+                <div class = "info">
+                    <h2>
+                        Demi Lovato intr-un scandal imens
+                    </h2>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi libero nulla sequi voluptates, perspiciatis porro hic consectetur necessitatibus explicabo expedita ratione repudiandae dolor et quas ullam nesciunt ea neque deserunt!
+                    
+                    </p>
+                </div>
+            </div>
+            <div class = "slide">
+                <img src = "b.jpg" alt = "404">
+                <div class = "info">
+                    <h2>
+                        A luat foc Teatrul National
+                    </h2>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi libero nulla sequi voluptates, perspiciatis porro hic consectetur necessitatibus explicabo expedita ratione repudiandae dolor et quas ullam nesciunt ea neque deserunt!
+                    
+                    </p>
+                </div>
+            </div>
+            <div class = "slide">
+                <img src = "c.jpg" alt = "404">
+                <div class = "info">
+                    <h2>
+                        Soc!! O zebra
+                    </h2>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi libero nulla sequi voluptates, perspiciatis porro hic consectetur necessitatibus explicabo expedita ratione repudiandae dolor et quas ullam nesciunt ea neque deserunt!
+                    
+                    </p>
+                </div>
+            </div>
+            <div class = "navigation">
+                <i class ="fas fa-chevron-left prev-btn"></i>
+                <i class ="fas fa-chevron-right next-btn"></i>
+            </div>
+        </div>
+        <script type = "text/javascript">
+            const prevBtn = document.querySelector(".prev-btn");
+            const nextBtn = document.querySelector(".next-btn");
+            const slides = document.querySelectorAll(".slide");
+            const slider = document.querySelector(".slider");
+            const numberOfSlides = slides.length;
+            var indexSlide = 0;
+
+            nextBtn.addEventListener("click", () => {
+                slides[indexSlide].classList.remove("active");
+                indexSlide++;
+
+                if(indexSlide > (numberOfSlides - 1)) {
+                    indexSlide = 0;
+                }
+
+                slides[indexSlide].classList.add("active");
+            });
+
+            prevBtn.addEventListener("click", () => {
+                slides[indexSlide].classList.remove("active");
+                indexSlide--;
+
+                if(indexSlide < 0) {
+                    indexSlide = (numberOfSlides - 1);
+                }
+
+                slides[indexSlide].classList.add("active");
+            });
+
+            var autoplay;
+            var play = () => {
+                autoplay = setInterval(function(){
+                    slides[indexSlide].classList.remove("active");
+                    indexSlide++;
+
+                    if(indexSlide > (numberOfSlides - 1)) {
+                        indexSlide = 0;
+                    }
+
+                    slides[indexSlide].classList.add("active");
+                }, 3000);
+            }
+            play();
+
+            slider.addEventListener("mouseover", () => {
+                clearInterval(autoplay);
+            })
+
+            slider.addEventListener("mouseout", () => {
+                play();
+            })
+        </script>
+    </body>
+</html>
