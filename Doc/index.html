@@ -150,7 +150,7 @@
         <h3>Autentificarea si inregistrarea</h3>
         <p>
             Autentificarea si inregistrarea utilizatorului se realizeaza intr-un pop-up dedicat acestei operatii
-             si presupune completarea campurilor necesare (nume de utilizator, email, parola) urmand ca apoi utlizatorul
+            si presupune completarea campurilor necesare (nume de utilizator, email, parola) urmand ca apoi utlizatorul
             sa apese pe butonul "Sign In", respectiv "Sign Up" si, in cazul in care datele sunt valide, acesta sa fie 
             redirectionat pe pagina principala (Home), respectiv sa-i fie creat un cont de utilizator (in cazul inregistrarii). 
             <img style="height:459px;width:816px;" class="image" alt="login" src="img/login.jpg">
@@ -163,7 +163,9 @@
             Bazat pe criteriile de selectie default si de preferintele utilizatorului in cazul in care acesta este autentificat,
             pagina de acasa va avea screen-uri de cate 6 actori nominalizati la SAG, la scroll urmand inca 6, si asa mai departe.
             Fiecare panel care contine un user va avea un buton de "Read More", astfel utilizatorul putand vedea mai multe
-            informatii despre actor, stiri despre acesta, etc.
+            informatii despre actor, stiri despre acesta, etc. Pagina de acasa ofera usurinta in navigare, utilizatorul putand sa 
+            caute un actor (in bara de search), sau sa foloseasca bara de navigare pentru a ajunge in oricare din celelalte pagini
+            (Setari, Stiri, Statistici).
             <img style="height:459px;width:816px;" class="image" alt="login" src="img/home.png">
         </p>
     </section>
@@ -173,7 +175,13 @@
         <p>
             Utilizatorul va putea accesa setari asociate contului sau. Astfel el va putea schimba parola, modifica
             mailul si alte informatii referitoare la contul personal. Tot in pagina de setari va putea alege preferintele
-            referitoare la sursele de stiri dar si la categoriile din care sa se faca selectia.
+            referitoare la sursele de stiri dar si la categoriile din care sa se faca selectia. Pentru a alege o alta poza a 
+            contului, utilizatorul poate apasa pe butonul "Change avatar", care va deschide un pop-up cu cei 8 avatari pe care
+            ii ofera aplicatia. Odata ce a selectat avatarul dorit, poate apasa pe butonul "Apply". Daca nu vrea sa salveze setarile,
+            utilizatorul poate apasa pe butonul "Cancel", sau oriunde in afara pop-up-ului. Setarile de cont cum ar fi username-ul,
+            emailul, parola se salveaza prin apasarea butonului "Submit" pentru fiecare in parte. Setarile legate de preferinte,
+            din partea dreapta a ecranului se salveaza automat la iesirea din pagina. 
+
             <img style="height:459px;width:816px;" class="image" alt="login" src="img/settings.png">
         </p>
     </section>
@@ -188,6 +196,18 @@
         </p>
     </section>
 
+    <section id="statistics">
+        <h3>Pagina de statistici</h3>
+        <p>
+            Utilizatorul va vedea statistici referitoare la <i>Cel mai cautat actor</i>, <i>Cea mai urmarita categorie</i>,
+            <i>Stirile cele mai vizionate</i> printr-o interfata primitoare. El va putea sa exporte staticticile oferite in 
+            3 formate si anume <i>CSV</i>, <i>WebP</i> si <i>SVG</i> prin apasarea butonului "Exporta ca" si 
+            alegerea unui format.
+
+            <img style="height:459px;width:816px;" class="image" alt="login" src="img/news.png">
+        </p>
+    </section>
+
 </section>
 
 <section id="Supporting Information">
@@ -195,7 +215,6 @@
     <section id="backend">
         <h3>Comunicarea cu backend-ul</h3>
         <p>
-            
             <img style="height:650px;width:480px;" class="image" alt="login" src="img/Capture.png">
         </p>
     </section>
