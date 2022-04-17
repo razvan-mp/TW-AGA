@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Setarile contului</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="navbar">
+    1
+</div>
+<div class="main-page">
+    <div id="id01" class="modal">
+
+        <form class="modal-content" method="post">
+
+            <div class="modal-images">
+
+                <img src="media/avatar_1.png" alt="Avatar number 1">
+                <img src="media/avatar_2.png" alt="Avatar number 2">
+                <img src="media/avatar_3.png" alt="Avatar number 3">
+                <img src="media/avatar_4.png" alt="Avatar number 4">
+                <img src="media/avatar_1.png" alt="Avatar number 1">
+                <img src="media/avatar_2.png" alt="Avatar number 2">
+                <img src="media/avatar_3.png" alt="Avatar number 3">
+                <img src="media/avatar_4.png" alt="Avatar number 4">
+            </div>
+
+            <div class="modal-buttons">
+
+                <button class="bounce-button" onclick=hideChoiceBar()>
+                    <span>Cancel</span>
+                </button>
+                <button class="bounce-button"><span>Apply</span></button>
+
+            </div>
+        </form>
+    </div>
+
+    <div class="main-grid">
+        <div class="grid-item interior-grid-left">
+
+            <div class="interior-grid-item upper-left">
+                <div class="circle">
+                    <img src="media/avatar_4.png" alt="Avatar number 4">
+                </div>
+
+                <button class="bounce-button" onclick=displayChoiceBar()>
+                    <span>Change avatar</span>
+                </button>
+            </div>
+
+            <div class="interior-grid-item lower-left">
+                <div class="grid-preferences">
+
+                    <form id="username-form">
+                        <label>
+                            <input type="text" class="user-info-input" id="username" placeholder="Username">
+                        </label>
+                    </form>
+                    <button type="submit" form="username-form" class="submit-info-button"><span>Submit </span></button>
+
+                    <form id="email-form">
+                        <label>
+                            <input type="email" class="user-info-input" id="email" placeholder="E-mail">
+                        </label>
+                    </form>
+                    <button type="submit" form="email-form" class="submit-info-button"><span>Submit </span></button>
+
+                    <form id="password-form">
+                        <label>
+                            <input type="password" class="user-info-input" id="password" placeholder="Password">
+                        </label>
+                    </form>
+                    <button type="submit" value="submit" form="password-form" class="submit-info-button">
+                        <span>Submit</span></button>
+
+
+                    <form id="password-confirmation-form">
+                        <label>
+                            <input type="password" class="user-info-input" id="confirm-password"
+                                   placeholder="Confirm password">
+                        </label>
+                    </form>
+                    <button type="submit" form="password-confirmation-form" class="submit-info-button">
+                        <span>Submit</span></button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="grid-item interior-grid-right">
+            <div class="interior-grid-item upper-right">
+                <div class="news-sources-item" id="firstItem">
+                    <span>Yahoo! News</span>
+                </div>
+                <div class="news-sources-item" id="secondItem">
+                    <span>Yahoo! News</span>
+                </div>
+                <div class="news-sources-item" id="thirdItem">
+                    <span>Yahoo! News</span>
+                </div>
+
+            </div>
+            <div class="interior-grid-item lower-right">
+                <div class="grid-preferences">
+                    <div class="checkbox-label">
+                        <input type="checkbox" name="comedy">
+                        <span>comedy</span>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" name="drama">
+                        <span>drama</span>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" name="tv_show">
+                        <span>TV show</span>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" name="film">
+                        <span>film</span>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" name="supporting_role">
+                        <span>supporting role</span>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" name="leading_role">
+                        <span>leading role</span>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" name="motion_picture">
+                        <span>motion picture</span>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" name="mini_series">
+                        <span>mini series</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let item1Selected = 0;
+    let item2Selected = 0;
+    let item3Selected = 0;
+    let item4Selected = 0;
+
+    const item1 = document.getElementById("firstItem");
+    const item2 = document.getElementById("secondItem");
+    const item3 = document.getElementById("thirdItem");
+    const item4 = document.getElementById("fourthItem");
+    const id01 = document.getElementById("id01");
+
+    item1.addEventListener('click', () => {
+        if (item1Selected === 0) {
+            item1.classList.add("item-is-selected");
+            item1Selected = 1;
+        } else {
+            item1Selected = 0;
+            item1.classList.remove("item-is-selected");
+        }
+    });
+
+    item2.addEventListener('click', () => {
+        if (item2Selected === 0) {
+            item2.classList.add("item-is-selected");
+            item2Selected = 1;
+        } else {
+            item2Selected = 0;
+            item2.classList.remove("item-is-selected");
+        }
+    });
+
+    item3.addEventListener('click', () => {
+        if (item3Selected === 0) {
+            item3.classList.add("item-is-selected");
+            item3Selected = 1;
+        } else {
+            item3Selected = 0;
+            item3.classList.remove("item-is-selected");
+        }
+    });
+
+    item4.addEventListener('click', () => {
+        if (item4Selected === 0) {
+            item4.classList.add("item-is-selected");
+            item4Selected = 1;
+        } else {
+            item4Selected = 0;
+            item4.classList.remove("item-is-selected");
+        }
+    });
+
+    id01.addEventListener('click', () => {
+        id01.style.display = 'block';
+    });
+
+    const modal = document.getElementById("id01");
+
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    function displayChoiceBar() {
+        document.getElementById('id01').style.display = 'block';
+    }
+
+    function hideChoiceBar() {
+        document.getElementById('id01').style.display = 'none';
+    }
+
+</script>
+
+</body>
+
+</html>
