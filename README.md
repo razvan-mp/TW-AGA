@@ -18,7 +18,7 @@
 - documentatie (_Abstract_, _Introducere_, _Descriere_, _Interfete externe_, _Functionalitati_)
 - design pagini (idei)
 
-3. Pahoncea-Morcov Razvan
+3. Morcov-Pahoncea Razvan
 - Login/Register page
 - structurarea codului
 - pasi de utilizare
