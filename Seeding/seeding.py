@@ -5,12 +5,11 @@
 import cx_Oracle
 import pandas as pd
 
-connection = cx_Oracle.connect('STUDENT/PASSWORD')
-cursor = connection.cursor()
 
 # Create the table
-
 try:
+    connection = cx_Oracle.connect('STUDENT/PASSWORD')
+    cursor = connection.cursor()
     cursor.execute("CREATE TABLE Student.ScreenActorGuildAwards(Id INTEGER,Year VARCHAR2(255),Category VARCHAR2(255),Name VARCHAR2(255),Show VARCHAR2(255),Won VARCHAR2(255))")
 
     print("Table created syccessfully")
@@ -22,8 +21,8 @@ finally:
     if connection:
         connection.close()
 
-#Insert real data
 
+#Insert real data
 try:
     connection = cx_Oracle.connect('STUDENT/PASSWORD')
     cursor = connection.cursor()
@@ -37,7 +36,6 @@ try:
         for index, row in df.iterrows():
             if ("Annual" in str(row['year'])) == True:
                 msg = "INSERT INTO ScreenActorGuildAwards VALUES(" + str(index + 1) + ", \'" + str(row['year']).replace("'", " ") + "\',\'" + str(row['category']).replace("'", " ")  + "\',\'" + str(row['full_name']).replace("'", " ")  + "\',\'" + str(row['show']).replace("'", " ")  +  "\',\'" + str(row['won']).replace("'", " ")  + '\')'
-                
                 cursor.execute(msg)
                 connection.commit()
         print("Data inserted successfully")
@@ -50,8 +48,8 @@ finally:
     if connection:
         connection.close()
 
-#See the data
 
+#See the data
 try:
     connection = cx_Oracle.connect('STUDENT/PASSWORD')
     cursor = connection.cursor()
