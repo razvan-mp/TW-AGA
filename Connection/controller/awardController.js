@@ -1,32 +1,32 @@
-const Actors = require('../models/awardModel')
+const Awards = require('../models/awardModel')
 
 const { getPostData } = require('../utils')
 
 // @desc Gets all awards
-// @route GET /api/products
+// @route GET /api/awards
 async function getAwards(req, res) {
     try {
-        const actors = await Actors.findAll()
+        const awards = await Awards.findAll()
 
         res.writeHead(200, {'Content-Type' : 'application/json'})
-        res.end(JSON.stringify(actors))
+        res.end(JSON.stringify(awards))
     } catch(error) {
         console.log(error)
     }
 }
 
 // @desc Gets single award
-// @route GET /api/actors/:id
+// @route GET /api/awards/:id
 async function getAward(req, res, id) {
     try {
-        const actor = await Actors.findById(id)
+        const award = await Awards.findById(id)
 
-        if(!actor) {
+        if(!award) {
             res.writeHead(404, {'Content-Type' : 'application/json'})
             res.end(JSON.stringify({message: 'Award not found'}))
         } else {
             res.writeHead(200, {'Content-Type' : 'application/json'})
-            res.end(JSON.stringify(actor))
+            res.end(JSON.stringify(award))
         }
 
         
@@ -36,7 +36,7 @@ async function getAward(req, res, id) {
 }
 
 // @desc Create a Award
-// @route POST /api/actors
+// @route POST /api/awards
 async function createAward(req, res) {
     try {
         const body = await getPostData(req)
@@ -48,7 +48,7 @@ async function createAward(req, res) {
             description
        }
 
-        const newAward = await Actors.create(award)
+        const newAward = await Awards.create(award)
 
         res.writeHead(201, {'Content-Type' : 'application/json'})
         return res.end(JSON.stringify(newAward))
@@ -59,12 +59,12 @@ async function createAward(req, res) {
 }
 
 // @desc Update a Award
-// @route PUT /api/actors/:id
+// @route PUT /api/awards/:id
 async function updateAward(req, res, id) {
     try {
-        const actor = await Actors.findById(id)
+        const award = await Awards.findById(id)
 
-        if(!actor) {
+        if(!award) {
             res.writeHead(404, {'Content-Type' : 'application/json'})
             res.end(JSON.stringify({message: 'Award not found'}))
         } else {
@@ -74,11 +74,11 @@ async function updateAward(req, res, id) {
             const {name, description} = JSON.parse(body)
 
             const awardData = {
-                name: name || actor.name,
-                description: description || actor.description
+                name: name || award.name,
+                description: description || award.description
             }
 
-            const updAward = await Actors.update(id, awardData)
+            const updAward = await Awards.update(id, awardData)
 
             res.writeHead(200, {'Content-Type' : 'application/json'})
             return res.end(JSON.stringify(updAward)) 

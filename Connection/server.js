@@ -3,15 +3,15 @@ const { getAwards, getAward, createAward, updateAward } = require('./controller/
 
 
 const server = http.createServer((req, res) => {
-    if(req.url === '/api/actors' && req.method === 'GET') {
+    if(req.url === '/api/awards' && req.method === 'GET') {
         getAwards(req, res)
 
-    } else if(req.url.match(/\/api\/actors\/([0-9]+)/) && req.method === 'GET') {   
+    } else if(req.url.match(/\/api\/awards\/([0-9]+)/) && req.method === 'GET') {   
         const id = req.url.split('/')[3]
         getAward(req, res, id)
-    } else if(req.url === '/api/actors' && req.method === 'POST') {
+    } else if(req.url === '/api/awards' && req.method === 'POST') {
         createAward(req, res)
-    } else if(req.url.match(/\/api\/actors\/([0-9]+)/) && req.method === 'PUT') {   
+    } else if(req.url.match(/\/api\/awards\/([0-9]+)/) && req.method === 'PUT') {   
         const id = req.url.split('/')[3]
         updateAward(req, res, id)
     } else {
