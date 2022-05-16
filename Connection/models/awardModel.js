@@ -26,8 +26,19 @@ function create(award) {
     })
 }
 
+function update(id, award) {
+    return new Promise((resolve, reject) => {
+        const index = actors.findIndex((p) =>p.id === id)
+        actors[index] = {id, ...award}
+
+        writeDataToFile('Connection/dataTest/actorsTest.json', actors)
+        resolve(actors[index])
+    })
+}
+
 module.exports = {
     findAll,
     findById,
-    create
+    create,
+    update
 }
