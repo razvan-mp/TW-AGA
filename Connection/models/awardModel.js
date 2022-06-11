@@ -1,6 +1,5 @@
-
 // const awards = require('../dataTest/actorsTest')
-const oracledb = require('oracledb')
+const oracledb = require("oracledb");
 // const {v4: uuidv4} = require('uuid')
 
 // const {writeDataToFile} = require('../utils')
@@ -37,44 +36,93 @@ const oracledb = require('oracledb')
 //     })
 // }
 
-function findAllOracle() {
-    return new Promise((resolve, reject) => {
-        const connectioString = "(DESCRIPTION =(LOAD_BALANCE = ON)(FAILOVER = ON)(ADDRESS =(PROTOCOL = TCP)(HOST = 192.168.43.89)(PORT = 1521))(ADDRESS = (PROTOCOL = TCP)(HOST = server2)(PORT =1521))(CONNECT_DATA=(SERVICE_NAME=XE)(FAILOVER_MODE=(TYPE=SELECT)(METHOD=BASIC))))"
-        oracledb.getConnection({
-            user:'STUDENT',
-            password:'PASSWORD',
-            tns:connectioString
-        },function(err, connection) {
+function findIfIsInTopByName(name) {
+  return new Promise((resolve, reject) => {
+    const connectioString =
+      "(DESCRIPTION =(LOAD_BALANCE = ON)(FAILOVER = ON)(ADDRESS =(PROTOCOL = TCP)(HOST = 192.168.43.89)(PORT = 1521))(ADDRESS = (PROTOCOL = TCP)(HOST = server2)(PORT =1521))(CONNECT_DATA=(SERVICE_NAME=XE)(FAILOVER_MODE=(TYPE=SELECT)(METHOD=BASIC))))";
+    oracledb.getConnection(
+      {
+        user: "STUDENT",
+        password: "PASSWORD",
+        tns: connectioString,
+      },
+      function (err, connection) {
+        if (err) {
+          console.error(err.message);
+          return;
+        }
+        connection.execute(
+            "SELECT MostAwardedActor('" + name + "') FROM DUAL",
+          [],
+          function (err, result) {
             if (err) {
-                console.error(err.message);
-                return;
+              console.error(err.message);
+              doRelease(connection);
+              return;
             }
-                 connection.execute("SELECT * FROM ScreenActorGuildAwards ORDER BY Id",[], function(err, result) {
-                if (err) { console.error(err.message);
-                      doRelease(connection);
-                      return;
-                 }
-                 console.log(result.metaData);
-                 resolve(result.rows);
-                 doRelease(connection);
-               });
-            });
-            function doRelease(connection) {
-                   connection.release(function(err) {
-                     if (err) {
-                      console.error(err.message);
-                    }
-                  }
-               );
+            console.log(result.metaData);
+            resolve(result.rows);
+            doRelease(connection);
+          }
+        );
+      }
+    );
+    function doRelease(connection) {
+      connection.release(function (err) {
+        if (err) {
+          console.error(err.message);
+        }
+      });
+    }
+  });
+}
+
+function findAllOracle() {
+  return new Promise((resolve, reject) => {
+    const connectioString =
+      "(DESCRIPTION =(LOAD_BALANCE = ON)(FAILOVER = ON)(ADDRESS =(PROTOCOL = TCP)(HOST = 192.168.43.89)(PORT = 1521))(ADDRESS = (PROTOCOL = TCP)(HOST = server2)(PORT =1521))(CONNECT_DATA=(SERVICE_NAME=XE)(FAILOVER_MODE=(TYPE=SELECT)(METHOD=BASIC))))";
+    oracledb.getConnection(
+      {
+        user: "STUDENT",
+        password: "PASSWORD",
+        tns: connectioString,
+      },
+      function (err, connection) {
+        if (err) {
+          console.error(err.message);
+          return;
+        }
+        connection.execute(
+          "SELECT * FROM ScreenActorGuildAwards ORDER BY Id",
+          [],
+          function (err, result) {
+            if (err) {
+              console.error(err.message);
+              doRelease(connection);
+              return;
             }
-        
-    })
+            console.log(result.metaData);
+            resolve(result.rows);
+            doRelease(connection);
+          }
+        );
+      }
+    );
+    function doRelease(connection) {
+      connection.release(function (err) {
+        if (err) {
+          console.error(err.message);
+        }
+      });
+    }
+  });
 }
 
 module.exports = {
-    // findAll,
-    // findById,
-    // create,
-    // update,
-    findAllOracle
-}
+  // findAll,
+  // findById,
+  // create,
+  // update,
+  findAllOracle,
+  findIfIsInTopByName,
+};
