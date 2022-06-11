@@ -1,7 +1,3 @@
-# Install cx-Oracle:
-# 
-# py -m pip install cx-Oracle
-
 import mysql.connector
 import pymysql
 import pandas as pd
