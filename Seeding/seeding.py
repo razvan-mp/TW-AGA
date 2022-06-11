@@ -1,8 +1,5 @@
-# Install cx-Oracle:
-# 
-# py -m pip install cx-Oracle
-
 import mysql.connector
+import pymysql
 import pandas as pd
 
 connection = mysql.connector.connect(
@@ -33,6 +30,7 @@ try:
     cursor = connection.cursor()
 
     cursor.execute("CREATE TABLE IF NOT EXISTS Awards.ScreenActorGuildAwards(Id INT NOT NULL AUTO_INCREMENT,Year VARCHAR(255),Category VARCHAR(255),Name VARCHAR(255), Show_Name VARCHAR(255),Won VARCHAR(255), PRIMARY KEY(Id))")
+    cursor.execute("CREATE TABLE IF NOT EXISTS Awards.ScreenActorGuildAwardsStaging(Year VARCHAR(255),Category VARCHAR(255),Name VARCHAR(255), Show_Name VARCHAR(255),Won VARCHAR(255))")
     print("Table created syccessfully")
 finally:
     if cursor:
@@ -41,13 +39,15 @@ finally:
         connection.close()
 
 
-# Insert real data
+# Bulk Insert real data
 try:
-    connection = mysql.connector.connect(
+    connection = pymysql.connect(
     host = "localhost",
     user = "admin",
     passwd = "admin",
-    database = "Awards"
+    database = "Awards",
+    autocommit = True,
+    local_infile = 1
     )
     cursor = connection.cursor()
 
@@ -56,13 +56,8 @@ try:
     rows = cursor.fetchall()
 
     if int(rows[0][0]) == 0:
-        df = pd.read_csv('screen_actor_guild_awards.csv')
-        # TODO Bulk insert
-        for index, row in df.iterrows():
-            if ("Annual" in str(row['year'])) == True:
-                msg = "INSERT INTO Awards.ScreenActorGuildAwards VALUES(" + str(index + 1) + ", \'" + str(row['year']).replace("'", " ") + "\',\'" + str(row['category']).replace("'", " ")  + "\',\'" + str(row['full_name']).replace("'", " ")  + "\',\'" + str(row['show']).replace("'", " ")  +  "\',\'" + str(row['won']).replace("'", " ")  + '\')'
-                cursor.execute(msg)
-                connection.commit()
+        cursor.execute("LOAD DATA LOCAL INFILE 'screen_actor_guild_awards.csv' INTO TABLE Awards.ScreenActorGuildAwardsStaging FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n'")
+        cursor.execute("INSERT INTO Awards.ScreenActorGuildAwards(Year, Category, Name, Show_Name, Won) SELECT Year, Category, Name, Show_Name, Won FROM Awards.ScreenActorGuildAwardsStaging")
         print("Data inserted successfully")
 
 finally:
