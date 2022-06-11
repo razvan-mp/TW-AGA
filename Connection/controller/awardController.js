@@ -90,11 +90,11 @@ const Awards = require('../models/awardModel')
 //     }
 // }
 
-// @desc Get a Award from oracle
-// @route PUT /api/oracle
-async function getAwardsOracle(req, res) {
+// @desc Get a Award from MySql
+// @route PUT /api/awards
+async function getAwards(req, res) {
     try {
-        const awards = await Awards.findAllOracle()
+        const awards = await Awards.findAll()
 
         res.writeHead(200, {'Content-Type' : 'application/json'})
         res.end(JSON.stringify(awards))
@@ -105,28 +105,28 @@ async function getAwardsOracle(req, res) {
 
 // @desc Gets single award
 // @route GET /api/mostawarded
-async function getIfIsInTop(req, res, name) {
-    try {
-        const isInTop = await Awards.findIfIsInTopByName(name)
+// async function getIfIsInTop(req, res, name) {
+//     try {
+//         const isInTop = await Awards.findIfIsInTopByName(name)
 
-        if(!isInTop) {
-            res.writeHead(404, {'Content-Type' : 'application/json'})
-            res.end(JSON.stringify({message: 'Award not found'}))
-        } else {
-            res.writeHead(200, {'Content-Type' : 'application/json'})
-            res.end(JSON.stringify(isInTop))
-        }
+//         if(!isInTop) {
+//             res.writeHead(404, {'Content-Type' : 'application/json'})
+//             res.end(JSON.stringify({message: 'Award not found'}))
+//         } else {
+//             res.writeHead(200, {'Content-Type' : 'application/json'})
+//             res.end(JSON.stringify(isInTop))
+//         }
 
-    } catch(error) {
-        console.log(error)
-    }
-}
+//     } catch(error) {
+//         console.log(error)
+//     }
+// }
 
 module.exports = {
     // getAwards,
     // getAward,
     // createAward,
     // updateAward,
-    getAwardsOracle,
-    getIfIsInTop
+    getAwards,
+    // getIfIsInTop
 }
