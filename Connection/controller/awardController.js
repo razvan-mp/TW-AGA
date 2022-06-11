@@ -92,7 +92,7 @@ const Awards = require('../models/awardModel')
 
 // @desc Get a Award from oracle
 // @route PUT /api/oracle
-async function getAwardsOracle(req, res, id) {
+async function getAwardsOracle(req, res) {
     try {
         const awards = await Awards.findAllOracle()
 
@@ -103,10 +103,30 @@ async function getAwardsOracle(req, res, id) {
     }
 }
 
+// @desc Gets single award
+// @route GET /api/mostawarded
+async function getIfIsInTop(req, res, name) {
+    try {
+        const isInTop = await Awards.findIfIsInTopByName(name)
+
+        if(!isInTop) {
+            res.writeHead(404, {'Content-Type' : 'application/json'})
+            res.end(JSON.stringify({message: 'Award not found'}))
+        } else {
+            res.writeHead(200, {'Content-Type' : 'application/json'})
+            res.end(JSON.stringify(isInTop))
+        }
+
+    } catch(error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
     // getAwards,
     // getAward,
     // createAward,
     // updateAward,
-    getAwardsOracle
+    getAwardsOracle,
+    getIfIsInTop
 }

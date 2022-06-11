@@ -1,5 +1,5 @@
 const http = require('http')
-const { getAwards, getAward, createAward, updateAward, getAwardsOracle } = require('./controller/awardController')
+const { getAwards, getAward, createAward, updateAward, getAwardsOracle, getIfIsInTop } = require('./controller/awardController')
 
 
 const server = http.createServer((req, res) => {
@@ -17,7 +17,12 @@ const server = http.createServer((req, res) => {
     // } else 
     if(req.url === '/api/oracle' && req.method === 'GET'){
         getAwardsOracle(req, res)
-    } else {
+    } else if(req.url.startsWith('/api/mostawarded') &&  req.method === 'GET') {   
+        const name = req.url.split('/')[3].replace("%20", " ")
+        console.log('Numele din server: ' + name)
+        getIfIsInTop(req, res, name)
+    
+    }  else {
         res.writeHead(404, {'Content-Type': 'application/json'})
         res.end(JSON.stringify({message: 'Route not found'}))
     } 
