@@ -44,6 +44,46 @@ function findIfIsInTopByName(name) {
   });
 }
 
+function findActors() {
+  return new Promise((resolve, reject) => {
+    connection.query("SELECT DISTINCT NAME FROM Awards.ScreenActorGuildAwards WHERE Name <> '';", function (err, result, fields) {
+      if (err) 
+        throw err;
+      resolve(result);
+      });
+    });
+}
+
+function findTopActors() {
+  return new Promise((resolve, reject) => {
+    connection.query("SELECT NAME, COUNT(*) As NumberOfAwards FROM Awards.ScreenActorGuildAwards WHERE Won = 'True' GROUP BY NAME HAVING NAME <> '' ORDER BY COUNT(*) DESC LIMIT 0, 10;", function (err, result, fields) {
+      if (err) 
+        throw err;
+      resolve(result);
+      });
+    });
+}
+
+function findTopActors() {
+  return new Promise((resolve, reject) => {
+    connection.query("SELECT NAME, COUNT(*) As NumberOfAwards FROM Awards.ScreenActorGuildAwards WHERE Won = 'True' GROUP BY NAME HAVING NAME <> '' ORDER BY COUNT(*) DESC LIMIT 0, 10;", function (err, result, fields) {
+      if (err) 
+        throw err;
+      resolve(result);
+      });
+    });
+}
+
+function findYearsOfAwardsByActor(name) {
+  return new Promise((resolve, reject) => {
+    connection.query("SELECT NAME, CAST(LEFT(YEAR, 4) AS SIGNED) AS Year, COUNT(*) AS NumberOfAwards FROM Awards.ScreenActorGuildAwards WHERE Won = 'True' GROUP BY NAME, YEAR HAVING NAME = '" + name + "'", function (err, result, fields) {
+      if (err) 
+        throw err;
+      resolve(result);
+      });
+    });
+}
+
 function findAll() {
   return new Promise((resolve, reject) => {
     connection.query("SELECT * FROM ScreenActorGuildAwards", function (err, result, fields) {
@@ -60,4 +100,7 @@ module.exports = {
   // create,
   // update,
   findAll,
+  findTopActors,
+  findYearsOfAwardsByActor,
+  findActors
 };
