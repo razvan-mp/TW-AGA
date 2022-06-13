@@ -90,13 +90,19 @@ const Awards = require('../models/awardModel')
 //     }
 // }
 
-// @desc Get a Award from MySql
+// @desc Get an award from MySQL
 // @route PUT /api/awards
 async function getAwards(req, res) {
+    res.writeHead(200, {
+        "Content-Type":"application/json",
+        "Access-Control-Allow-Origin":"*",
+        "Access-Control-Allow-Headers":"Origin, X-Requested-With, Content-Type, Accept"
+    });
     try {
         const awards = await Awards.findAll()
 
-        res.writeHead(200, {'Content-Type' : 'application/json'})
+        res.writeHead(200, {'Content-Type' : 'application/json', "Access-Control-Allow-Origin":"*",
+            "Access-Control-Allow-Headers":"Origin, X-Requested-With, Content-Type, Accept"})
         res.end(JSON.stringify(awards))
     } catch(error) {
         console.log(error)

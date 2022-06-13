@@ -4,7 +4,7 @@ import pandas as pd
 
 connection = mysql.connector.connect(
     host = "localhost",
-    user = "admin",
+    user = "root",
     passwd = "admin"
 )
 cursor = connection.cursor()
@@ -23,7 +23,7 @@ finally:
 try:
     connection = mysql.connector.connect(
     host = "localhost",
-    user = "admin",
+    user = "root",
     passwd = "admin",
     database = "Awards"
     )
@@ -43,7 +43,7 @@ finally:
 try:
     connection = pymysql.connect(
     host = "localhost",
-    user = "admin",
+    user = "root",
     passwd = "admin",
     database = "Awards",
     autocommit = True,
@@ -71,7 +71,7 @@ finally:
 try:
     connection = mysql.connector.connect(
     host = "localhost",
-    user = "admin",
+    user = "root",
     passwd = "admin",
     database = "Awards"
     )
