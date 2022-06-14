@@ -39,9 +39,9 @@ const connection = require('../database/db')
 // }
 
 function findIfIsInTopByName(name) {
-  return new Promise((resolve, reject) => {
-    // Daca trebuie facem
-  });
+    return new Promise((resolve, reject) => {
+        // Daca trebuie facem
+    });
 }
 
 function findActors() {
@@ -85,13 +85,23 @@ function findYearsOfAwardsByActor(name) {
 }
 
 function findAll() {
-  return new Promise((resolve, reject) => {
-    connection.query("SELECT * FROM ScreenActorGuildAwards", function (err, result, fields) {
-      if (err) 
-        throw err;
-      resolve(result);
-      });
+    return new Promise((resolve, reject) => {
+        connection.query("SELECT * FROM ScreenActorGuildAwards", function (err, result, fields) {
+            if (err)
+                throw err;
+            resolve(result);
+        });
     });
+}
+
+function findByName(name) {
+    return new Promise((resolve, reject) => {
+        connection.query("SELECT * FROM ScreenActorGuildAwards WHERE NAME LIKE '" + name + "%' OR NAME LIKE ' " + name + "%'", function (err, result, fields) {
+            if (err)
+                throw err;
+            resolve(result);
+        });
+    })
 }
 
 module.exports = {
@@ -99,8 +109,13 @@ module.exports = {
   // findById,
   // create,
   // update,
-  findAll,
   findTopActors,
   findYearsOfAwardsByActor,
-  findActors
+  findActors,
+    // findAll,
+    // findById,
+    // create,
+    // update,
+    findAll,
+    findByName
 };
