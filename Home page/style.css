@@ -2,7 +2,6 @@
 
 html {
     font-family: 'Montserrat', sans-serif;
-    scroll-behavior: smooth;
 }
 
 a {
@@ -95,4 +94,76 @@ a:hover {
 
 .crop {
     object-position: center center;
+}
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+.body-blackout {
+    position: absolute;
+    z-index: 1010;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 2500rem;
+    background-color: rgba(0, 0, 0, .65);
+    display: none;
+}
+.body-blackout.is-blacked-out {
+    display: block;
+}
+.popup-trigger {
+    display: inline-block;
+}
+.popup-modal {
+    height: 75vh;
+    width: 75%;
+    background-color: #fff;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 45px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 300ms ease-in-out;
+    z-index: 1011;
+    border-radius: 20px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.popup-modal::-webkit-scrollbar {
+    display: none;
+}
+
+.popup-modal.is--visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+.popup-modal__close {
+    position: absolute;
+    font-size: 1.2rem;
+    right: -10px;
+    top: -10px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.stop-scroll {
+    height: 100%;
+    overflow: hidden;
+}
+
+.close-button {
+    height: 40px;
+    width: 50px;
+    text-align: center;
+    padding-top: 10px;
+    border-radius: 100%;
+    background-color: #0080b3;
+    font-style: normal;
+    font-weight: 600;
 }

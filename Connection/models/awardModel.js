@@ -1,7 +1,6 @@
 // const awards = require('../dataTest/actorsTest')
-const connection = require('../database/db')
-const mysql = require('mysql')
-
+const connection = require("../database/db");
+const mysql = require("mysql");
 
 // const {v4: uuidv4} = require('uuid')
 
@@ -40,81 +39,88 @@ const mysql = require('mysql')
 // }
 
 function findIfIsInTopByName(name) {
-    return new Promise((resolve, reject) => {
-        // Daca trebuie facem
-    });
+  return new Promise((resolve, reject) => {
+    // TODO
+  });
 }
 
 function findActors() {
   return new Promise((resolve, reject) => {
-    connection.query("SELECT DISTINCT NAME FROM Awards.ScreenActorGuildAwards WHERE Name <> '';", function (err, result, fields) {
-      if (err) 
-        throw err;
-      resolve(result);
-      });
-    });
+    connection.query(
+      "SELECT DISTINCT NAME FROM Awards.ScreenActorGuildAwards WHERE Name <> '';",
+      function (err, result, fields) {
+        if (err) throw err;
+        resolve(result);
+      }
+    );
+  });
 }
 
 function findTopActors() {
   return new Promise((resolve, reject) => {
-    connection.query("SELECT NAME, COUNT(*) As NumberOfAwards FROM Awards.ScreenActorGuildAwards WHERE Won = 'True' GROUP BY NAME HAVING NAME <> '' ORDER BY COUNT(*) DESC LIMIT 0, 10;", function (err, result, fields) {
-      if (err) 
-        throw err;
-      resolve(result);
-      });
-    });
+    connection.query(
+      "SELECT NAME, COUNT(*) As NumberOfAwards FROM Awards.ScreenActorGuildAwards WHERE Won = 'True' GROUP BY NAME HAVING NAME <> '' ORDER BY COUNT(*) DESC LIMIT 0, 10;",
+      function (err, result, fields) {
+        if (err) throw err;
+        resolve(result);
+      }
+    );
+  });
 }
 
 // Prevent SQL Injection
 function findYearsOfAwardsByActor(name) {
   return new Promise((resolve, reject) => {
-    var sql = "SELECT NAME, CAST(LEFT(YEAR, 4) AS SIGNED) AS Year, COUNT(*) AS NumberOfAwards FROM Awards.ScreenActorGuildAwards WHERE Won = 'True' GROUP BY NAME, YEAR HAVING NAME = ?";
+    var sql =
+      "SELECT NAME, CAST(LEFT(YEAR, 4) AS SIGNED) AS Year, COUNT(*) AS NumberOfAwards FROM Awards.ScreenActorGuildAwards WHERE Won = 'True' GROUP BY NAME, YEAR HAVING NAME = ?";
     var inserts = [name];
-    sql = mysql.format(sql, inserts)
+    sql = mysql.format(sql, inserts);
     connection.query(sql, function (err, result, fields) {
-      if (err) 
-        throw err;
+      if (err) throw err;
       resolve(result);
-      });
     });
+  });
 }
 
 function findAll() {
-    return new Promise((resolve, reject) => {
-        connection.query("SELECT * FROM ScreenActorGuildAwards", function (err, result, fields) {
-            if (err)
-                throw err;
-            resolve(result);
-        });
-    });
+  return new Promise((resolve, reject) => {
+    connection.query(
+      "SELECT * FROM ScreenActorGuildAwards",
+      function (err, result, fields) {
+        if (err) throw err;
+        resolve(result);
+      }
+    );
+  });
 }
 
 function findByName(name) {
-    return new Promise((resolve, reject) => {
-        name = name.trimStart();
-        var sql = "SELECT * FROM ScreenActorGuildAwards WHERE NAME LIKE ?% OR NAME LIKE + " + ' ' + "?%";
-        var inserts = [name];
-        sql = mysql.format(sql, inserts, inserts)
-        connection.query("SELECT * FROM ScreenActorGuildAwards WHERE NAME LIKE '" + name + "%' OR NAME LIKE ' " + name + "%'", function (err, result, fields) {
-            if (err)
-                throw err;
-            resolve(result);
-        });
-    })
+  return new Promise((resolve, reject) => {
+    name = name.trimStart();
+    var sql =
+      "SELECT * FROM ScreenActorGuildAwards WHERE NAME LIKE ?% OR NAME LIKE + " +
+      " " +
+      "?%";
+    var inserts = [name];
+    sql = mysql.format(sql, inserts, inserts);
+    connection.query(
+      "SELECT * FROM ScreenActorGuildAwards WHERE NAME LIKE '" +
+        name +
+        "%' OR NAME LIKE ' " +
+        name +
+        "%'",
+      function (err, result, fields) {
+        if (err) throw err;
+        resolve(result);
+      }
+    );
+  });
 }
 
 module.exports = {
-  // findAll,
-  // findById,
-  // create,
-  // update,
   findTopActors,
   findYearsOfAwardsByActor,
   findActors,
-    // findAll,
-    // findById,
-    // create,
-    // update,
-    findAll,
-    findByName
+  findAll,
+  findByName,
 };
