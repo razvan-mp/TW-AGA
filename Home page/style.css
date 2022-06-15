@@ -169,7 +169,7 @@ a {
 }
 
 .scrollToTopBtn {
-    background-color: green;
+    background-color: #004643;
     padding: 5px;
     box-shadow: 0 2px 4px darkslategrey;
     transition: all 0.2s ease;

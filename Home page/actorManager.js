@@ -154,35 +154,116 @@ function searchActor() {
     htmlRequestTMDB.send();
 
     if (inputValue === '') {
-        showAllActors()
+        window.location.replace('index.html')
     } else {
+        const modalsSection = document.getElementById('modals')
         htmlRequestTMDB.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
                 actorList = JSON.parse(htmlRequestTMDB.responseText)
-                console.log(actorList[0])
                 let actorSection = document.getElementById('actors')
                 actorSection.innerHTML = ""
-                actorList.length = 5
+                actorList.length = 100
                 for (let actor in actorList) {
                     let requestName = movieRequestURL + actorList[actor]["Name"].replaceAll(" ", "%20") + "&page=1"
-                    console.log(requestName)
 
                     let htmlRequestTMDB = new XMLHttpRequest();
                     htmlRequestTMDB.open("GET", requestName, true);
                     htmlRequestTMDB.send();
                     htmlRequestTMDB.onreadystatechange = function () {
                         if (this.readyState === 4 && this.status === 200) {
-                            let fullResponse = JSON.parse(htmlRequestTMDB.responseText)
+                            let movieResponse = JSON.parse(htmlRequestTMDB.responseText)
+
+                            let actorName = actorList[actor]["Name"].toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.substring(1)).join(' ')
+                            if (actorList[actor]["Won"] === "True\r")
+                                actorName += ' 🏆'
+                            let actorImageURL = imgPath + movieResponse['results'][0]['profile_path']
+                            let awardYear = actorList[actor]["Year"].split(' ')[0]
+                            let awardCategory = actorList[actor]["Category"].charAt(1) + actorList[actor]["Category"].substring(2).toLowerCase()
+                            let showName = actorList[actor]["Show_Name"].toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.substring(1)).join(' ')
+
                             document.getElementById('actors').innerHTML += "<li>\n" +
-                                "            <figure>\n" +
-                                "                <img class='crop' src='" + imgPath + fullResponse['results'][0]['profile_path'] + "' alt='" + actorList[actor]['Name'] + "'>\n" +
-                                "                <figcaption><h3>" + actorList[actor]["Name"].toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.substring(1)).join(' ') + "</h3></figcaption>\n" +
+                                "            <figure class='popup-trigger' data-popup-trigger=\"" + actorName + "\">\n" +
+                                "                <img class='crop' src='" + actorImageURL + "' alt=\"" + actorName + "\">\n" +
+                                "                <figcaption><h3>" + actorName + "</h3></figcaption>\n" +
                                 "            </figure>\n" +
                                 "                <div class='is-pulled-left'>\n" +
-                                "                    <p><b>Year: </b>" + actorList[actor]["Year"].split(' ')[0] + "</p>\n" +
-                                "                    <p><b>Category: </b>" + actorList[actor]["Category"].charAt(1) + actorList[actor]["Category"].substring(2).toLowerCase() + "</p>\n" +
-                                "                    <p><b>Show name: </b>" + actorList[actor]["Show_Name"].toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.substring(1)).join(' ');
-                            +"</p></div></li>"
+                                "                    <p><b>Year: </b>" + awardYear + "</p>\n" +
+                                "                    <p><b>Category: </b>" + awardCategory + "</p>\n" +
+                                "                    <p><b>Show name: </b>" + showName
+                                + "</p></div></li>"
+
+                            let personInfoURL = "https://api.themoviedb.org/3/person/"
+                            let key = "?api_key=01d27a60012da6c4514d0865a5e025e3&language=en-US"
+
+                            let requestPersonInfo = new XMLHttpRequest()
+                            requestPersonInfo.open('GET', personInfoURL + movieResponse['results'][0]['id'] + key, true)
+                            requestPersonInfo.send()
+
+                            requestPersonInfo.onreadystatechange = function () {
+                                if (this.readyState === 4 && this.status === 200) {
+                                    let personResponse = JSON.parse(requestPersonInfo.responseText)
+
+                                    let biography = personResponse['biography']
+                                    let birthday = personResponse['birthday']
+                                    let birthplace = personResponse['place_of_birth']
+                                    let moviesPlayed = movieResponse['results'][0]['known_for']
+
+                                    let movieList = ''
+
+                                    if (moviesPlayed != undefined) {
+                                        movieList += '<h3>Movies known for</h3>'
+                                        for (let i = 0; i < moviesPlayed.length; i++) {
+                                            movieList += '<h4>'
+                                            if (moviesPlayed[i]['media_type'] === 'movie') {
+                                                movieList += moviesPlayed[i]['title']
+                                                movieList += ' (<em>'
+                                                movieList += moviesPlayed[i]['release_date'].split('-')[0]
+                                                movieList += '</em>)'
+                                            } else if (moviesPlayed[i]['media_type'] === 'tv') {
+                                                movieList += moviesPlayed[i]['name']
+                                                movieList += ' (<em>'
+                                                movieList += moviesPlayed[i]['first_air_date'].split('-')[0]
+                                                movieList += '</em>)'
+                                            }
+                                            movieList += '</h4>'
+                                            movieList += moviesPlayed[i]['overview']
+                                        }
+                                    }
+
+
+                                    modalsSection.innerHTML += "    <div class='popup-modal' data-popup-modal=\"" + actorName + "\">\n" +
+                                        "        <i class='popup-modal__close'></i>\n" +
+                                        "        <h1>\n" +
+                                        actorName +
+                                        "        </h1>\n" +
+                                        "<h3>Biography</h3>" +
+                                        biography +
+                                        "<h3>Birthday</h3>" +
+                                        birthday +
+                                        "<h3>Birth place</h3>" +
+                                        birthplace +
+                                        movieList +
+                                        "    </div>"
+
+                                    let trigger = document.querySelector(`[data-popup-trigger="${actorName}"]`)
+                                    trigger.addEventListener('click', () => {
+                                        let popupModal = document.querySelector(`[data-popup-modal="${actorName}"]`)
+
+                                        popupModal.classList.add('is--visible')
+                                        document.querySelector('.body-blackout').classList.add('is-blacked-out')
+
+                                        popupModal.querySelector('.popup-modal__close').addEventListener('click', () => {
+                                            popupModal.classList.remove('is--visible')
+                                            document.querySelector('.body-blackout').classList.remove('is-blacked-out')
+                                        })
+
+                                        document.querySelector('.body-blackout').addEventListener('click', () => {
+                                            popupModal.classList.remove('is--visible')
+                                            document.querySelector('.body-blackout').classList.remove('is-blacked-out')
+                                        })
+                                    })
+                                }
+                            }
                         }
                     }
                 }
