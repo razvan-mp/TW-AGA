@@ -3,7 +3,7 @@ const requestURL = "http://localhost:5000/api/awards"
 const movieRequestURL = "https://api.themoviedb.org/3/search/person?api_key=01d27a60012da6c4514d0865a5e025e3&query="
 const imgPath = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2"
 
-async function showAllActors() {
+function showAllActors() {
     let xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", requestURL, true);
     xmlHttp.send();
@@ -36,8 +36,8 @@ async function showAllActors() {
                             let showName = actorList[actor]["Show_Name"].toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.substring(1)).join(' ')
 
                             actorsSection.innerHTML += "<li>\n" +
-                                "            <figure class='popup-trigger' data-popup-trigger='" + actorName + "'>\n" +
-                                "                <img class='crop' src='" + actorImageURL + "' alt='" + actorName + "'>\n" +
+                                "            <figure class='popup-trigger' data-popup-trigger=\"" + actorName + "\">\n" +
+                                "                <img class='crop' src='" + actorImageURL + "' alt=\"" + actorName + "\">\n" +
                                 "                <figcaption><h3>" + actorName + "</h3></figcaption>\n" +
                                 "            </figure>\n" +
                                 "                <div class='is-pulled-left'>\n" +
@@ -85,7 +85,7 @@ async function showAllActors() {
                                     }
 
 
-                                    modalsSection.innerHTML += "    <div class='popup-modal' data-popup-modal='" + actorName + "'>\n" +
+                                    modalsSection.innerHTML += "    <div class='popup-modal' data-popup-modal=\"" + actorName + "\">\n" +
                                         "        <i class='popup-modal__close'></i>\n" +
                                         "        <h1>\n" +
                                         actorName +
@@ -99,27 +99,21 @@ async function showAllActors() {
                                         movieList +
                                         "    </div>"
 
-                                    const modalTriggers = document.querySelectorAll('.popup-trigger')
-                                    const modalCloseTrigger = document.querySelector('.popup-modal__close')
-                                    const bodyBlackout = document.querySelector('.body-blackout')
+                                    let trigger = document.querySelector(`[data-popup-trigger="${actorName}"]`)
+                                    trigger.addEventListener('click', () => {
+                                        let popupModal = document.querySelector(`[data-popup-modal="${actorName}"]`)
 
-                                    modalTriggers.forEach(trigger => {
-                                        trigger.addEventListener('click', () => {
-                                            const {popupTrigger} = trigger.dataset
-                                            const popupModal = document.querySelector(`[data-popup-modal="${popupTrigger}"]`)
+                                        popupModal.classList.add('is--visible')
+                                        document.querySelector('.body-blackout').classList.add('is-blacked-out')
 
-                                            popupModal.classList.add('is--visible')
-                                            bodyBlackout.classList.add('is-blacked-out')
+                                        popupModal.querySelector('.popup-modal__close').addEventListener('click', () => {
+                                            popupModal.classList.remove('is--visible')
+                                            document.querySelector('.body-blackout').classList.remove('is-blacked-out')
+                                        })
 
-                                            popupModal.querySelector('.popup-modal__close').addEventListener('click', () => {
-                                                popupModal.classList.remove('is--visible')
-                                                bodyBlackout.classList.remove('is-blacked-out')
-                                            })
-
-                                            bodyBlackout.addEventListener('click', () => {
-                                                popupModal.classList.remove('is--visible')
-                                                bodyBlackout.classList.remove('is-blacked-out')
-                                            })
+                                        document.querySelector('.body-blackout').addEventListener('click', () => {
+                                            popupModal.classList.remove('is--visible')
+                                            document.querySelector('.body-blackout').classList.remove('is-blacked-out')
                                         })
                                     })
                                 }
@@ -132,6 +126,7 @@ async function showAllActors() {
     }
 }
 
+showAllActors()
 
 function searchActor() {
     const requestURL = 'http://localhost:5000/api/awards/'
@@ -179,4 +174,3 @@ function searchActor() {
     }
 }
 
-showAllActors()
