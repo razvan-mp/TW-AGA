@@ -15,6 +15,7 @@ function showAllActors() {
             const modalsSection = document.getElementById('modals')
             actorsSection.innerHTML = ''
             actorList.length = 100
+            let lazy = 10
             for (let actor in actorList) {
                 if (actorList[actor]["Name"] !== '' && actorList[actor]["Name"] !== 'Name') {
                     let requestName = movieRequestURL + actorList[actor]["Name"].replaceAll(" ", "%20") + "&page=1"
@@ -35,7 +36,8 @@ function showAllActors() {
                             let awardCategory = actorList[actor]["Category"].charAt(1) + actorList[actor]["Category"].substring(2).toLowerCase()
                             let showName = actorList[actor]["Show_Name"].toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.substring(1)).join(' ')
 
-                            actorsSection.innerHTML += "<li>\n" +
+                            if (lazy > 0) {
+                                actorsSection.innerHTML += "<li>\n" +
                                 "            <figure class='popup-trigger' data-popup-trigger=\"" + actorName + "\">\n" +
                                 "                <img class='crop' src='" + actorImageURL + "' alt=\"" + actorName + "\">\n" +
                                 "                <figcaption><h3>" + actorName + "</h3></figcaption>\n" +
@@ -45,6 +47,20 @@ function showAllActors() {
                                 "                    <p><b>Category: </b>" + awardCategory + "</p>\n" +
                                 "                    <p><b>Show name: </b>" + showName
                                 + "</p></div></li>"
+
+                                lazy--
+                            } else {
+                                actorsSection.innerHTML += "<li>\n" +
+                                "            <figure class='popup-trigger' data-popup-trigger=\"" + actorName + "\">\n" +
+                                "                <img class='crop' src='img/placeholder.gif' data-src='" + actorImageURL + "' alt=\"" + actorName + "\">\n" +
+                                "                <figcaption><h3>" + actorName + "</h3></figcaption>\n" +
+                                "            </figure>\n" +
+                                "                <div class='is-pulled-left'>\n" +
+                                "                    <p><b>Year: </b>" + awardYear + "</p>\n" +
+                                "                    <p><b>Category: </b>" + awardCategory + "</p>\n" +
+                                "                    <p><b>Show name: </b>" + showName
+                                + "</p></div></li>"
+                            }
 
                             let personInfoURL = "https://api.themoviedb.org/3/person/"
                             let key = "?api_key=01d27a60012da6c4514d0865a5e025e3&language=en-US"
@@ -174,3 +190,27 @@ function searchActor() {
     }
 }
 
+function isVisible(elem) {
+    let coords = elem.getBoundingClientRect()
+
+    let windowHeight = document.documentElement.clientHeight
+    let topVisible = coords.top > 0 && coords.top < windowHeight
+
+    let bottomVisible = coords.bottom < windowHeight && coords.bottom > 0
+
+    return topVisible || bottomVisible
+}
+
+function showVisible() {
+    for (let img of document.querySelectorAll('img')) {
+        let realSrc = img.dataset.src
+        if (!realSrc) continue
+
+        if (isVisible(img)) {
+            img.src = realSrc
+            img.dataset.src = ''
+        }
+    }
+}
+
+window.addEventListener('scroll', showVisible)
