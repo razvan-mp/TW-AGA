@@ -65,16 +65,6 @@ function findTopActors() {
     });
 }
 
-function findTopActors() {
-  return new Promise((resolve, reject) => {
-    connection.query("SELECT NAME, COUNT(*) As NumberOfAwards FROM Awards.ScreenActorGuildAwards WHERE Won = 'True' GROUP BY NAME HAVING NAME <> '' ORDER BY COUNT(*) DESC LIMIT 0, 10;", function (err, result, fields) {
-      if (err) 
-        throw err;
-      resolve(result);
-      });
-    });
-}
-
 // Prevent SQL Injection
 function findYearsOfAwardsByActor(name) {
   return new Promise((resolve, reject) => {
@@ -101,6 +91,10 @@ function findAll() {
 
 function findByName(name) {
     return new Promise((resolve, reject) => {
+        var sql = "SELECT * FROM ScreenActorGuildAwards WHERE NAME LIKE ?% OR NAME LIKE ?%";
+        var inserts = [name];
+        var inserts2 = [' ' + name]
+        sql = mysql.format(sql, inserts, inserts2)
         connection.query("SELECT * FROM ScreenActorGuildAwards WHERE NAME LIKE '" + name + "%' OR NAME LIKE ' " + name + "%'", function (err, result, fields) {
             if (err)
                 throw err;

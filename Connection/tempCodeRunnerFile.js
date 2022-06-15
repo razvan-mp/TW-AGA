@@ -1,1 +1,1 @@
-yearsOfAwards
+req.url.match('\/api\/awards\/([a-z \.]+)')
