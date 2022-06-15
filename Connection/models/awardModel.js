@@ -91,10 +91,10 @@ function findAll() {
 
 function findByName(name) {
     return new Promise((resolve, reject) => {
-        var sql = "SELECT * FROM ScreenActorGuildAwards WHERE NAME LIKE ?% OR NAME LIKE ?%";
+        name = name.trimStart();
+        var sql = "SELECT * FROM ScreenActorGuildAwards WHERE NAME LIKE ?% OR NAME LIKE + " + ' ' + "?%";
         var inserts = [name];
-        var inserts2 = [' ' + name]
-        sql = mysql.format(sql, inserts, inserts2)
+        sql = mysql.format(sql, inserts, inserts)
         connection.query("SELECT * FROM ScreenActorGuildAwards WHERE NAME LIKE '" + name + "%' OR NAME LIKE ' " + name + "%'", function (err, result, fields) {
             if (err)
                 throw err;
