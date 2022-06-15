@@ -8,7 +8,7 @@ body {
     --height: 50;
     --width: 300;
     --border: 5;
-    --speed: 0.4;
+    --speed: 0.5;
     --ease: cubic-bezier(0.85, 0.01, 0.4, 0.97);
     --color-bk: white;
     /*display: flex;*/

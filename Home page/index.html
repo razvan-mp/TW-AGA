@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang='en'>
+
 <head>
     <meta charset='UTF-8'>
     <title>Title</title>
@@ -7,23 +8,28 @@
     <link rel='stylesheet' href='search.css'>
     <script src='actorManager.js'></script>
 </head>
+
 <body>
-<div class="body-blackout"></div>
-<script>
-    showAllActors()
-</script>
-<label class='input-container closed'>
-    <div class='shadow'></div>
-    <div class='center'>
-        <input id='search' type='text' class='input' placeholder='Search actor'>
+    <div class="body-blackout"></div>
+    <label class='input-container closed'>
+        <div class='shadow'></div>
+        <div class='center'>
+            <input id='search' type='text' class='input' placeholder='Search actor'>
+        </div>
+        <div class='sticks'></div>
+    </label>
+    <section class='actors'>
+        <ul id='actors'>
+        </ul>
+    </section>
+  
+    <button class="scrollToTopBtn">&#8679</button>
+  
+    <div id='modals'>
     </div>
-    <div class='sticks'></div>
-</label>
-<section class='actors'>
-    <ul id='actors'>
-    </ul>
-</section>
-<button class="scrollToTopBtn">&#8679</button>
+    
+</body>
+<!-- script for search bar animation (TO ADD IN .js) -->
 <script>
     document.querySelector('.sticks').addEventListener('click', (e) => {
         e.stopPropagation();
@@ -31,6 +37,7 @@
         document.querySelector('.input-container').blur();
     });
 </script>
+<!-- script for search (TO ADD IN .js) -->
 <script>
     const input = document.querySelector('input');
     input.addEventListener('keyup', (event) => {
