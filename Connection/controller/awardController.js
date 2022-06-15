@@ -63,25 +63,25 @@ const Awards = require('../models/awardModel')
 // async function updateAward(req, res, id) {
 //     try {
 //         const award = await Awards.findById(id)
-
+//
 //         if(!award) {
 //             res.writeHead(404, {'Content-Type' : 'application/json'})
 //             res.end(JSON.stringify({message: 'Award not found'}))
 //         } else {
-           
+//
 //             const body = await getPostData(req)
-
+//
 //             const {name, description} = JSON.parse(body)
-
+//
 //             const awardData = {
 //                 name: name || award.name,
 //                 description: description || award.description
 //             }
-
+//
 //             const updAward = await Awards.update(id, awardData)
-
+//
 //             res.writeHead(200, {'Content-Type' : 'application/json'})
-//             return res.end(JSON.stringify(updAward)) 
+//             return res.end(JSON.stringify(updAward))
 //         }
 
       
@@ -165,6 +165,28 @@ async function getAwards(req, res) {
     }
 }
 
+// @desc Get an award from MySQL
+// @route PUT /api/award/{name}
+async function getActor(actorName, res) {
+    res.writeHead(200, {
+        "Content-Type":"application/json",
+        "Access-Control-Allow-Origin":"*",
+        "Access-Control-Allow-Headers":"Origin, X-Requested-With, Content-Type, Accept"
+    });
+
+    try{
+        const award = await Awards.findByName(actorName)
+
+        res.writeHead(200, {'Content-Type' : 'application/json', "Access-Control-Allow-Origin":"*",
+            "Access-Control-Allow-Headers":"Origin, X-Requested-With, Content-Type, Accept"})
+        res.end(JSON.stringify(award))
+    }
+    catch(error) {
+        console.log(error)
+    }
+}
+
+
 // @desc Gets single award
 // @route GET /api/mostawarded
 // async function getIfIsInTop(req, res, name) {
@@ -192,6 +214,7 @@ module.exports = {
     getAwards,
     getYearsOfAwardsByActor,
     getTopActors,
-    getActors
+    getActors,
+    getActor
     // getIfIsInTop
 }

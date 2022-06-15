@@ -1,5 +1,5 @@
 const http = require('http')
-const { getAwards, getTopActors, getYearsOfAwardsByActor, getActors } = require('./controller/awardController')
+const { getAwards, getTopActors, getYearsOfAwardsByActor, getActors, getAward, createAward, updateAward, getActor } = require('./controller/awardController')
 
 const server = http.createServer((req, res) => {
 
@@ -14,7 +14,7 @@ const server = http.createServer((req, res) => {
     // } else if(req.url.match(/\/api\/awards\/([0-9]+)/) && req.method === 'PUT') {   
     //     const id = req.url.split('/')[3]
     //     updateAward(req, res, id)
-    // } else 
+    // } else
     if(req.url === '/api/awards' && req.method === 'GET'){
         getAwards(req, res).then(r => { return r })
     } else if(req.url.startsWith('/api/yearsOfAwards') &&  req.method === 'GET') {   
@@ -28,7 +28,21 @@ const server = http.createServer((req, res) => {
     } else if(req.url.startsWith('/api/actors') &&  req.method === 'GET') {   
         getActors(req, res).then(r => { return r })
     
-    }  else {
+    }  else if (req.url === '/api/awards' && req.method === 'GET') {
+        getAwards(req, res).then(r => {
+            return r
+        })
+        // } else if(req.url.startsWith('/api/mostawarded') &&  req.method === 'GET') {
+        //     const name = req.url.split('/')[3].replace("%20", " ")
+        //     console.log('Numele din server: ' + name)
+        //     getIfIsInTop(req, res, name)
+
+    } else if (req.url.match('\/api\/awards\/([a-z \.]+)') && req.method === 'GET') {
+        let actorName = req.url.split('/')[3]
+        getActor(actorName.replaceAll("'", "\\'"), res).then(r => {
+            return r
+        })
+    } else {
         res.writeHead(404, {'Content-Type': 'application/json'})
         res.end(JSON.stringify({message: 'Route not found'}))
     }
