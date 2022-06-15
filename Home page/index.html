@@ -8,6 +8,7 @@
     <script src='actorManager.js'></script>
 </head>
 <body>
+<div class="body-blackout"></div>
 <script>
     showAllActors()
 </script>
@@ -22,6 +23,7 @@
     <ul id='actors'>
     </ul>
 </section>
+<button class="scrollToTopBtn">&#8679</button>
 <script>
     document.querySelector('.sticks').addEventListener('click', (e) => {
         e.stopPropagation();
@@ -36,4 +38,5 @@
     })
 </script>
 </body>
+<script src='backToTop.js'></script>
 </html>
