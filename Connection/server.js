@@ -16,28 +16,31 @@ const server = http.createServer((req, res) => {
     //     updateAward(req, res, id)
     // } else
     if(req.url === '/api/awards' && req.method === 'GET'){
-        getAwards(req, res).then(r => { return r })
-    } else if(req.url.startsWith('/api/yearsOfAwards') &&  req.method === 'GET') {   
+        getAwards(req, res).then(r => { 
+            return r 
+        })
+    } else if(req.url.match("\/api\/yearsOfAwards\/([a-z .]+)")  &&  req.method === 'GET') {  
         const name = req.url.split('/')[3].replace("%20", " ")
-        console.log('Numele din server: ' + name)
-        getYearsOfAwardsByActor(req, res, name).then(r => { return r })
+        getYearsOfAwardsByActor(req, res, name).then(r => { 
+            return r 
+        })
     
-    } else if(req.url.startsWith('/api/topActors') &&  req.method === 'GET') {   
-        getTopActors(req, res).then(r => { return r })
+    } else if(req.url === '/api/topActors' &&  req.method === 'GET') {   
+        getTopActors(req, res).then(r => { 
+            return r 
+        })
     
-    } else if(req.url.startsWith('/api/actors') &&  req.method === 'GET') {   
-        getActors(req, res).then(r => { return r })
+    } else if(req.url === '/api/actors' &&  req.method === 'GET') {   
+        getActors(req, res).then(r => { 
+            return r 
+        })
     
     }  else if (req.url === '/api/awards' && req.method === 'GET') {
         getAwards(req, res).then(r => {
             return r
         })
-        // } else if(req.url.startsWith('/api/mostawarded') &&  req.method === 'GET') {
-        //     const name = req.url.split('/')[3].replace("%20", " ")
-        //     console.log('Numele din server: ' + name)
-        //     getIfIsInTop(req, res, name)
 
-    }else if (req.url.match('\/api\/awards\/([a-z \.]+)') && req.method === 'GET') {
+    }else if (req.url.match("\/api\/awards\/([a-z .]+)") && req.method === 'GET') {
         let actorName = req.url.split('/')[3]
         getActor(actorName.replaceAll("'", "\\'").replaceAll('%20', ' '), res).then(r => {
             return r
