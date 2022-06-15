@@ -1,5 +1,6 @@
 // const awards = require('../dataTest/actorsTest')
 const connection = require('../database/db')
+const mysql = require('mysql')
 
 
 // const {v4: uuidv4} = require('uuid')
@@ -74,9 +75,13 @@ function findTopActors() {
     });
 }
 
+// Prevent SQL Injection
 function findYearsOfAwardsByActor(name) {
   return new Promise((resolve, reject) => {
-    connection.query("SELECT NAME, CAST(LEFT(YEAR, 4) AS SIGNED) AS Year, COUNT(*) AS NumberOfAwards FROM Awards.ScreenActorGuildAwards WHERE Won = 'True' GROUP BY NAME, YEAR HAVING NAME = '" + name + "'", function (err, result, fields) {
+    var sql = "SELECT NAME, CAST(LEFT(YEAR, 4) AS SIGNED) AS Year, COUNT(*) AS NumberOfAwards FROM Awards.ScreenActorGuildAwards WHERE Won = 'True' GROUP BY NAME, YEAR HAVING NAME = ?";
+    var inserts = [name];
+    sql = mysql.format(sql, inserts)
+    connection.query(sql, function (err, result, fields) {
       if (err) 
         throw err;
       resolve(result);
