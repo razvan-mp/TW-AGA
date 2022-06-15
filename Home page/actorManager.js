@@ -146,7 +146,8 @@ showAllActors()
 
 function searchActor() {
     const requestURL = 'http://localhost:5000/api/awards/'
-    let inputValue = document.getElementById('search').value;
+    let inputValue = document.getElementById('search').value.toLowerCase();
+    console.log("numele actorului: " + inputValue)
 
     let htmlRequestTMDB = new XMLHttpRequest();
     htmlRequestTMDB.open('GET', requestURL + inputValue, true);

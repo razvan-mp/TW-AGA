@@ -37,9 +37,9 @@ const server = http.createServer((req, res) => {
         //     console.log('Numele din server: ' + name)
         //     getIfIsInTop(req, res, name)
 
-    } else if (req.url.startsWith('/api/awards') && req.method === 'GET') {
-        const actorName = req.url.split('/')[3].replace("%20", " ")
-        getActor(actorName.replaceAll("'", "\\'"), res).then(r => {
+    }else if (req.url.match('\/api\/awards\/([a-z \.]+)') && req.method === 'GET') {
+        let actorName = req.url.split('/')[3]
+        getActor(actorName.replaceAll("'", "\\'").replaceAll('%20', ' '), res).then(r => {
             return r
         })
     } else {

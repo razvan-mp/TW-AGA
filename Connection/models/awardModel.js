@@ -71,9 +71,9 @@ function findTopActors() {
 // Prevent SQL Injection
 function findYearsOfAwardsByActor(name) {
   return new Promise((resolve, reject) => {
-    var sql =
+    let sql =
       "SELECT NAME, CAST(LEFT(YEAR, 4) AS SIGNED) AS Year, COUNT(*) AS NumberOfAwards FROM Awards.ScreenActorGuildAwards WHERE Won = 'True' GROUP BY NAME, YEAR HAVING NAME = ?";
-    var inserts = [name];
+    const inserts = [name];
     sql = mysql.format(sql, inserts);
     connection.query(sql, function (err, result, fields) {
       if (err) throw err;
@@ -97,19 +97,11 @@ function findAll() {
 function findByName(name) {
   return new Promise((resolve, reject) => {
     name = name.trimStart();
-    var sql =
-      "SELECT * FROM ScreenActorGuildAwards WHERE NAME LIKE ?% OR NAME LIKE + " +
-      " " +
-      "?%";
-    var inserts = [name];
-    sql = mysql.format(sql, inserts, inserts);
+    let sql = "SELECT * FROM ScreenActorGuildAwards WHERE NAME LIKE ? OR NAME LIKE ?";
+    const inserts = [name + '%', "% " + name + "%"];
+    sql = mysql.format(sql, inserts);
     connection.query(
-      "SELECT * FROM ScreenActorGuildAwards WHERE NAME LIKE '" +
-        name +
-        "%' OR NAME LIKE ' " +
-        name +
-        "%'",
-      function (err, result, fields) {
+      sql, function (err, result, fields) {
         if (err) throw err;
         resolve(result);
       }
