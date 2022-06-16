@@ -39,11 +39,6 @@ const mysql = require("mysql");
 // }
 
 function findIfIsInTopByName(name) {
-<<<<<<< HEAD
-    return new Promise((resolve, reject) => {
-        // Daca trebuie facem
-    });
-=======
   return new Promise((resolve, reject) => {
     // TODO
   });
@@ -112,7 +107,6 @@ function findByName(name) {
       }
     );
   });
->>>>>>> f0c178ec2f14fd6fa8bd759b77c06a2e751c5b1d
 }
 
 function findAll() {
@@ -136,18 +130,9 @@ function findByName(name) {
 }
 
 module.exports = {
-<<<<<<< HEAD
-    // findAll,
-    // findById,
-    // create,
-    // update,
-    findAll,
-    findByName
-=======
   findTopActors,
   findYearsOfAwardsByActor,
   findActors,
   findAll,
   findByName,
->>>>>>> f0c178ec2f14fd6fa8bd759b77c06a2e751c5b1d
 };
