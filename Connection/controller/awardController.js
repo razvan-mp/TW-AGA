@@ -212,6 +212,7 @@ module.exports = {
     // createAward,
     // updateAward,
     getAwards,
-    getActor
+    getActor,
+    getTopActors
     // getIfIsInTop
 }

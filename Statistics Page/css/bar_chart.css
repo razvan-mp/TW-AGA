@@ -1,0 +1,82 @@
+#chart {
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    height: 400px;
+}
+
+.charttitle {
+    font-size: 14pt;
+    font-weight: 600;
+    text-align: center;
+}
+
+.bars td {
+    vertical-align: bottom;
+}
+
+.bars div:hover {
+    opacity: 0.6;
+}
+
+.legend {
+    width: 20%;
+    vertical-align: center;
+    padding-left: 20px;
+    text-align: left;
+}
+
+.legbox {
+    display: block;
+    clear: both;
+}
+
+.xaxisname {
+    margin: 5px;
+    color: #fff;
+    font-size: 77%;
+    padding: 5px;
+    float: left;
+}
+
+.one {
+    background: #16A085;
+}
+
+.two {
+    background: #2ECC71;
+}
+
+.three {
+    background: #27b7b7;
+}
+
+.four {
+    background: #3498DB;
+}
+
+.five {
+    background: #2980B9;
+}
+
+.six {
+    background: #9B59B6;
+}
+
+.seven {
+    background: #8E44AD;
+}
+
+.eight {
+    background: #F1C40F;
+}
+
+.nine {
+    background: #F39C12;
+}
+
+.ten {
+    background: #E67E22;
+}

@@ -39,74 +39,73 @@ const mysql = require("mysql");
 // }
 
 function findIfIsInTopByName(name) {
-  return new Promise((resolve, reject) => {
-    // TODO
-  });
+    return new Promise((resolve, reject) => {
+        // TODO
+    });
 }
 
 function findActors() {
-  return new Promise((resolve, reject) => {
-    connection.query(
-      "SELECT DISTINCT NAME FROM Awards.ScreenActorGuildAwards WHERE Name <> '';",
-      function (err, result, fields) {
-        if (err) throw err;
-        resolve(result);
-      }
-    );
-  });
+    return new Promise((resolve, reject) => {
+        connection.query(
+            "SELECT DISTINCT NAME FROM Awards.ScreenActorGuildAwards WHERE Name <> '';",
+            function (err, result, fields) {
+                if (err) throw err;
+                resolve(result);
+            }
+        );
+    });
 }
 
 function findTopActors() {
-  return new Promise((resolve, reject) => {
-    connection.query(
-      "SELECT NAME, COUNT(*) As NumberOfAwards FROM Awards.ScreenActorGuildAwards WHERE Won = 'True' GROUP BY NAME HAVING NAME <> '' ORDER BY COUNT(*) DESC LIMIT 0, 10;",
-      function (err, result, fields) {
-        if (err) throw err;
-        resolve(result);
-      }
-    );
-  });
+    return new Promise((resolve, reject) => {
+        let sql = "SELECT NAME, COUNT(*) As NumberOfAwards FROM Awards.ScreenActorGuildAwards WHERE Won = 'True\r' GROUP BY NAME HAVING NAME <> '' ORDER BY COUNT(*) DESC LIMIT 0, 10;"
+        connection.query(sql, function (err, result, fields) {
+                if (err) throw err;
+                resolve(result);
+            }
+        );
+    });
 }
 
 // Prevent SQL Injection
 function findYearsOfAwardsByActor(name) {
-  return new Promise((resolve, reject) => {
-    let sql =
-      "SELECT NAME, CAST(LEFT(YEAR, 4) AS SIGNED) AS Year, COUNT(*) AS NumberOfAwards FROM Awards.ScreenActorGuildAwards WHERE Won = 'True' GROUP BY NAME, YEAR HAVING NAME = ?";
-    const inserts = [name];
-    sql = mysql.format(sql, inserts);
-    connection.query(sql, function (err, result, fields) {
-      if (err) throw err;
-      resolve(result);
+    return new Promise((resolve, reject) => {
+        let sql =
+            "SELECT NAME, CAST(LEFT(YEAR, 4) AS SIGNED) AS Year, COUNT(*) AS NumberOfAwards FROM Awards.ScreenActorGuildAwards WHERE Won = 'True' GROUP BY NAME, YEAR HAVING NAME = ?";
+        const inserts = [name];
+        sql = mysql.format(sql, inserts);
+        connection.query(sql, function (err, result, fields) {
+            if (err) throw err;
+            resolve(result);
+        });
     });
-  });
 }
 
 function findAll() {
-  return new Promise((resolve, reject) => {
-    connection.query(
-      "SELECT * FROM ScreenActorGuildAwards",
-      function (err, result, fields) {
-        if (err) throw err;
-        resolve(result);
-      }
-    );
-  });
+    return new Promise((resolve, reject) => {
+        connection.query(
+            "SELECT * FROM ScreenActorGuildAwards",
+            function (err, result, fields) {
+                if (err) throw err;
+                resolve(result);
+            }
+        );
+    });
 }
 
 function findByName(name) {
-  return new Promise((resolve, reject) => {
-    name = name.trimStart();
-    let sql = "SELECT * FROM ScreenActorGuildAwards WHERE NAME LIKE ? OR NAME LIKE ?";
-    const inserts = [name + '%', "% " + name + "%"];
-    sql = mysql.format(sql, inserts);
-    connection.query(
-      sql, function (err, result, fields) {
-        if (err) throw err;
-        resolve(result);
-      }
-    );
-  });
+    return new Promise((resolve, reject) => {
+        name = name.trimStart();
+        let sql = "SELECT * FROM ScreenActorGuildAwards WHERE NAME LIKE ? OR NAME LIKE ?";
+        const inserts = [name + '%', "% " + name + "%"];
+        sql = mysql.format(sql, inserts);
+        connection.query(
+            sql, function (err, result, fields) {
+                if (err) throw err;
+                resolve(result);
+            }
+        );
+    });
 }
 
 function findAll() {
@@ -120,9 +119,9 @@ function findAll() {
 }
 
 module.exports = {
-  findTopActors,
-  findYearsOfAwardsByActor,
-  findActors,
-  findAll,
-  findByName,
+    findTopActors,
+    findYearsOfAwardsByActor,
+    findActors,
+    findAll,
+    findByName,
 };

@@ -3,62 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Statistici</title>
-    <link rel="stylesheet" href="statistics.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/bar_chart.css">
 </head>
 
 <body>
-    <ul class="navbar">
-        <li><a href="../Login Page with Navbar/login.html">Acasă</a></li>
-        <li><a href="../Slider Page/slider.html">Știri</a></li>
-        <li><a class="active" href="#">Statistici</a></li>
-        <li class="right"><a  href="#">
-            Setări
-        </a></li>
+<header class="header">
+    <a href="/" class="logo">AGA</a>
+    <input class="menu-btn" type="checkbox" id="menu-btn"/>
+    <label class="menu-icon" for="menu-btn"><span class="nav-icon"></span></label>
+    <ul class="menu">
+        <li><a href="Home" class="navbar-button">Home</a></li>
+        <li><a href="News" class="navbar-button">News</a></li>
+        <li><a href="Settings" class="navbar-button">Settings</a></li>
     </ul>
-<div class="flex-container">
-    <div class = "most-searched-actors-container">
-        <div class="item1">Most searched actor</div>
-        <div id="actor1_name" class="item">Actor name</div>
-        <div id="actor1_hits" class="item">No. of hits</div>
-        <div class="item">Actor name</div>
-        <div class="item">No. of hits</div>
-        <div class="item">Actor name</div>
-        <div class="item">No. of hits</div>
-        <div class="item">Actor name</div>
-        <div class="item">No. of hits</div>
-        <div class="item">Actor name</div>
-        <div class="item">No. of hits</div>
-    </div>
-    <div class = "most-viewed-news-stories-container">
-        <div class="item1">Most viewed news stories</div>
-        <div class="item">Story title</div>
-        <div class="item">No. of hits</div>
-        <div class="item">Story title</div>
-        <div class="item">No. of hits</div>
-        <div class="item">Story title</div>
-        <div class="item">No. of hits</div>
-        <div class="item">Story title</div>
-        <div class="item">No. of hits</div>
-        <div class="item">Story title</div>
-        <div class="item">No. of hits</div>
-    </div>
-    <div class = "most-popular-category-container">
-        <div class="item1">Most popular category</div>
-        <div class="item">Category name</div>
-        <div class="item">No. of hits</div>
-        <div class="item">Category name</div>
-        <div class="item">No. of hits</div>
-        <div class="item">Category name</div>
-        <div class="item">No. of hits</div>
-        <div class="item">Category name</div>
-        <div class="item">No. of hits</div>
-        <div class="item">Category name</div>
-        <div class="item">No. of hits</div>
-    </div>
+</header>
+
+<br><br><br><br><br><br><br>
+
+<div class="card">
+    <div id="chart"></div>
 </div>
 
-
-
 </body>
+    <script src="js/barChart.js"></script>
 
 </html>
