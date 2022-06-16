@@ -212,12 +212,6 @@ module.exports = {
     // createAward,
     // updateAward,
     getAwards,
-<<<<<<< HEAD
-=======
-    getYearsOfAwardsByActor,
-    getTopActors,
-    getActors,
->>>>>>> f0c178ec2f14fd6fa8bd759b77c06a2e751c5b1d
     getActor
     // getIfIsInTop
 }
