@@ -90,6 +90,63 @@ const Awards = require('../models/awardModel')
 //     }
 // }
 
+// @desc Gets list actors
+// @route GET /api/actors
+async function getActors(req, res) {
+    res.writeHead(200, {
+        "Content-Type":"application/json",
+        "Access-Control-Allow-Origin":"*",
+        "Access-Control-Allow-Headers":"Origin, X-Requested-With, Content-Type, Accept"
+    });
+    try {
+        const actors = await Awards.findActors()
+
+        res.writeHead(200, {'Content-Type' : 'application/json', "Access-Control-Allow-Origin":"*","Access-Control-Allow-Headers":"Origin, X-Requested-With, Content-Type, Accept"})
+        res.end(JSON.stringify(actors))
+
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+// @desc Gets list of top actors
+// @route GET /api/topActors
+async function getTopActors(req, res) {
+    res.writeHead(200, {
+        "Content-Type":"application/json",
+        "Access-Control-Allow-Origin":"*",
+        "Access-Control-Allow-Headers":"Origin, X-Requested-With, Content-Type, Accept"
+    });
+    try {
+        const actors = await Awards.findTopActors()
+
+        res.writeHead(200, {'Content-Type' : 'application/json', "Access-Control-Allow-Origin":"*","Access-Control-Allow-Headers":"Origin, X-Requested-With, Content-Type, Accept"})
+        res.end(JSON.stringify(actors))
+
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+// @desc Gets list of years
+// @route GET /api/yearsOfAwards
+async function getYearsOfAwardsByActor(req, res, name) {
+    res.writeHead(200, {
+        "Content-Type":"application/json",
+        "Access-Control-Allow-Origin":"*",
+        "Access-Control-Allow-Headers":"Origin, X-Requested-With, Content-Type, Accept"
+    });
+    try {
+        const years = await Awards.findYearsOfAwardsByActor(name)
+
+        res.writeHead(200, {'Content-Type' : 'application/json', "Access-Control-Allow-Origin":"*","Access-Control-Allow-Headers":"Origin, X-Requested-With, Content-Type, Accept"})
+        res.end(JSON.stringify(years))
+
+    } catch(error) {
+        console.log(error)
+    }
+}
+
 // @desc Get an award from MySQL
 // @route PUT /api/awards
 async function getAwards(req, res) {
@@ -101,8 +158,7 @@ async function getAwards(req, res) {
     try {
         const awards = await Awards.findAll()
 
-        res.writeHead(200, {'Content-Type' : 'application/json', "Access-Control-Allow-Origin":"*",
-            "Access-Control-Allow-Headers":"Origin, X-Requested-With, Content-Type, Accept"})
+        res.writeHead(200, {'Content-Type' : 'application/json', "Access-Control-Allow-Origin":"*","Access-Control-Allow-Headers":"Origin, X-Requested-With, Content-Type, Accept"})
         res.end(JSON.stringify(awards))
     } catch(error) {
         console.log(error)
@@ -156,6 +212,12 @@ module.exports = {
     // createAward,
     // updateAward,
     getAwards,
+<<<<<<< HEAD
+=======
+    getYearsOfAwardsByActor,
+    getTopActors,
+    getActors,
+>>>>>>> f0c178ec2f14fd6fa8bd759b77c06a2e751c5b1d
     getActor
     // getIfIsInTop
 }
