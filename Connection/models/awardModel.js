@@ -119,16 +119,6 @@ function findAll() {
     });
 }
 
-function findByName(name) {
-    return new Promise((resolve, reject) => {
-        connection.query("SELECT * FROM ScreenActorGuildAwards WHERE NAME LIKE '" + name + "%' OR NAME LIKE ' " + name + "%'", function (err, result, fields) {
-            if (err)
-                throw err;
-            resolve(result);
-        });
-    })
-}
-
 module.exports = {
   findTopActors,
   findYearsOfAwardsByActor,
