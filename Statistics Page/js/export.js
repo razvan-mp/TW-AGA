@@ -689,3 +689,55 @@ function getStatsImage(chart, format) {
         })
     }
 }
+
+function getCSV(chart) {
+    let outputName = ''
+    if (chart === 'bar') {
+        outputName = 'top-10-awarded.csv'
+    } else {
+        outputName = 'percentage-won.csv'
+    }
+
+    let top10 = new Promise((res, rej) => {
+            let requestURL = "http://localhost:5000/api/topActors"
+            let request = new XMLHttpRequest()
+            request.open('GET', requestURL, true)
+            request.send()
+
+            request.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    res(JSON.parse(request.responseText))
+                }
+            }
+        })
+
+    top10.then(res => {
+        if(chart === 'bar'){
+            let csvContent = 'Name, Won count\n'
+
+            for (let i = 0; i < 10; i++)
+                csvContent += res[i]["NAME"] + "," + res[i]["WonCount"] + "\n"
+
+            let hiddenElement = document.createElement('a');
+            hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvContent);
+            hiddenElement.target = '_blank';
+            hiddenElement.download = outputName;
+            hiddenElement.click();
+        }
+        else {
+            let csvContent = 'Name, Won percentage\n'
+
+            for (let i = 0; i < 10; i++)
+            {
+                let percentage = (res[i]["WonCount"] / res[i]["total"]) * 100
+                csvContent += res[i]["NAME"] + "," + percentage + "\n"
+            }
+
+            let hiddenElement = document.createElement('a');
+            hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvContent);
+            hiddenElement.target = '_blank';
+            hiddenElement.download = outputName;
+            hiddenElement.click();
+        }
+    })
+}
