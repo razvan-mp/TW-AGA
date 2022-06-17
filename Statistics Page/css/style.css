@@ -10,12 +10,35 @@ body {
     border: 0;
 }
 
-.card {
+.card-pie {
     background-color: white;
     width: 80%;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 35px;
     height: 5%;
     border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgb(0 0 0 / 10%);
+    align-content: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card-bar {
+    background-color: white;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 35px;
+    height: 5%;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgb(0 0 0 / 10%);
+    align-content: center;
+}
+
+.card-pie > p {
+    font-size: 14pt;
+    font-weight: 600;
+    text-align: center;
 }

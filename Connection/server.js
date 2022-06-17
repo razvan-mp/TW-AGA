@@ -45,7 +45,8 @@ const server = http.createServer((req, res) => {
         getActor(actorName.replaceAll("'", "\\'").replaceAll('%20', ' '), res).then(r => {
             return r
         })
-    } else {
+    }
+    else {
         res.writeHead(404, {'Content-Type': 'application/json'})
         res.end(JSON.stringify({message: 'Route not found'}))
     }

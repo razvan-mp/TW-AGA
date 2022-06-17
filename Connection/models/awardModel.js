@@ -58,7 +58,9 @@ function findActors() {
 
 function findTopActors() {
     return new Promise((resolve, reject) => {
-        let sql = "SELECT NAME, COUNT(*) As NumberOfAwards FROM Awards.ScreenActorGuildAwards WHERE Won = 'True\r' GROUP BY NAME HAVING NAME <> '' ORDER BY COUNT(*) DESC LIMIT 0, 10;"
+        let sql = "SELECT NAME, COUNT(*) As total, sum(case when Won = 'True\\r' then 1 else 0 end) As WonCount FROM " +
+            "awards.ScreenActorGuildAwards GROUP BY NAME HAVING NAME <> '' ORDER BY sum(case when Won = 'True\\r' then " +
+            "1 else 0 end) DESC LIMIT 0, 10;"
         connection.query(sql, function (err, result, fields) {
                 if (err) throw err;
                 resolve(result);
@@ -123,5 +125,5 @@ module.exports = {
     findYearsOfAwardsByActor,
     findActors,
     findAll,
-    findByName,
+    findByName
 };
