@@ -1,5 +1,6 @@
 hexColors = ["#9B59B6", "#F1C40F", "#3498DB", "#27b7b7", "#2ECC71", "#16A085"]
-hexColorsBg = [ "#d47bfc", "#f6d778", "#71b9e3", "#76c7c7", "#73ce98", "#6db29b"]
+hexColorsBg = ["#d47bfc", "#f6d778", "#71b9e3", "#76c7c7", "#73ce98", "#6db29b"]
+
 function getTopActors() {
     return new Promise((res, rej) => {
         let requestURL = "http://localhost:5000/api/topActors"
@@ -31,7 +32,7 @@ function generateCharts(r) {
             let percent = (r[j]["WonCount"] / r[j]["total"]) * 100
             pieCharts.innerHTML += "<div class = 'pie-chart' " +
                 "data-name='" + r[j]["NAME"] + "' " +
-                "data-percentage=" + percent + " "+
+                "data-percentage=" + percent + " " +
                 "data-fill-color=" + hexColors[j] + " " +
                 "data-bg-color=" + hexColorsBg[j] + " " +
                 "data-diameter='300' " +
@@ -48,16 +49,14 @@ getTopActors().then(r => {
         let pieCharts = document.querySelectorAll('.pie-chart');
 
         Array.prototype.forEach.call(pieCharts, function (wrapperEl) {
-            // Pull our letiables out of our helper div
             let dataset = wrapperEl.dataset;
             let actorName = dataset.name;
             let percentage = dataset.percentage ? parseInt(dataset.percentage, 10) : 0;
             let diameter = dataset.diameter ? parseInt(dataset.diameter, 10) : 150;
             let strokeWidth = dataset.strokeWidth ? parseInt(dataset.strokeWidth, 10) : 15;
-            let fillColor = dataset.fillColor || '#f47b28'; // orange
-            let bgColor = dataset.bgColor || '#fac5a1'; // light orange
+            let fillColor = dataset.fillColor || '#f47b28';
+            let bgColor = dataset.bgColor || '#fac5a1';
 
-            // Size our wrapper element and add our percentage
             wrapperEl.style.height = diameter + 'px';
             wrapperEl.style.width = diameter + 'px';
             let percentageEl = document.createElement('span');
@@ -66,14 +65,12 @@ getTopActors().then(r => {
             percentageEl.innerText = actorName + "\n won \n" + percentage + "%" + "\nawards";
             wrapperEl.appendChild(percentageEl);
 
-            // Setting up the values we're gonna use to draw our circles
             let center = diameter;
             let radius = center - (strokeWidth);
             let startAngle = degreesToRadians(-90);
             let fullCircle = degreesToRadians(365);
             let endAngle = startAngle + degreesToRadians(percentage / 100 * 365);
 
-            // Draw our canvas! Note we're doubling our sizes so we look good on high res displays
             let canvas = document.createElement('canvas');
             canvas.classList.add('pie-chart__canvas');
             canvas.height = diameter * 2;
@@ -107,13 +104,9 @@ getTopActors().then(r => {
         TDATA = 'td';
 
     let chart = document.createElement('div');
-//create the chart canvas
     let barchart = document.createElement('table');
-//create the title row
     let titlerow = document.createElement(TROW);
-//create the title data
     let titledata = document.createElement(TDATA);
-//make the colspan to number of records
     titledata.setAttribute('colspan', chartjson.data.length + 1);
     titledata.setAttribute('class', 'charttitle');
     titledata.innerText = chartjson.title;
@@ -121,10 +114,8 @@ getTopActors().then(r => {
     barchart.appendChild(titlerow);
     chart.appendChild(barchart);
 
-//create the bar row
     let barrow = document.createElement(TROW);
 
-//lets add data to the chart
     for (let i = 0; i < chartjson.data.length; i++) {
         barrow.setAttribute('class', 'bars');
         //create the bar data
@@ -162,4 +153,67 @@ getTopActors().then(r => {
     document.getElementById('chart').innerHTML = chart.outerHTML;
 })
 
+function getAllYearStats() {
+    return new Promise((res, rej) => {
+        let requestURL = "http://localhost:5000/api/all_time"
+        let request = new XMLHttpRequest()
+        request.open('GET', requestURL, true)
+        request.send()
 
+        request.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                let response = JSON.parse(request.responseText)
+                let yearList = []
+                let wonList = []
+                let totalList = []
+                let loserList = []
+                for (let i = 0; i < response.length; i++) {
+                    yearList.push(response[i]['YEAR'])
+                    wonList.push(response[i]['WINS'])
+                    totalList.push(response[i]['TOTAL'])
+                    loserList.push(response[i]['LOSSES'])
+                }
+                let resolveValue = []
+                resolveValue.push(yearList.reverse())
+                resolveValue.push(wonList.reverse())
+                resolveValue.push(totalList.reverse())
+                resolveValue.push(loserList.reverse())
+
+                res(resolveValue)
+            }
+        }
+    })
+}
+
+getAllYearStats().then(r => {
+    console.log(r)
+
+    let lineChart = new Chart("won-chart", {
+        type: "line",
+        data: {
+            labels: r[0],
+            datasets: [{
+                data: r[1],
+                borderColor: "lightgreen",
+                fill: false,
+                label: 'Number of winners'
+            }, {
+                data: r[2],
+                borderColor: "lightblue",
+                fill: false,
+                label: 'Total number of nominations'
+            }, {
+                data: r[3],
+                borderColor: "magenta",
+                fill: false,
+                label: 'Number of losers'
+            }]
+        },
+        options: {
+            legend: {
+                display: true,
+                position: "right"
+            }
+        }
+    })
+})

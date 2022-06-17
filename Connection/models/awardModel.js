@@ -83,18 +83,6 @@ function findYearsOfAwardsByActor(name) {
     });
 }
 
-function findAll() {
-    return new Promise((resolve, reject) => {
-        connection.query(
-            "SELECT * FROM ScreenActorGuildAwards",
-            function (err, result, fields) {
-                if (err) throw err;
-                resolve(result);
-            }
-        );
-    });
-}
-
 function findByName(name) {
     return new Promise((resolve, reject) => {
         name = name.trimStart();
@@ -120,10 +108,21 @@ function findAll() {
     });
 }
 
+function findAllStats() {
+    return new Promise((resolve, reject) => {
+        connection.query("SELECT SUBSTRING_INDEX(YEAR, ' ', 1) AS YEAR, COUNT(*) AS TOTAL, SUM(CASE WHEN WON='True\\r' THEN 1 ELSE 0 END) AS WINS, SUM(CASE WHEN WON='False\\r' THEN 1 ELSE 0 END) AS LOSSES FROM awards.screenactorguildawards GROUP BY YEAR HAVING YEAR LIKE '%-%'", function (err, result, fields) {
+            if (err)
+                throw err
+            resolve(result)
+        })
+    })
+}
+
 module.exports = {
     findTopActors,
     findYearsOfAwardsByActor,
     findActors,
     findAll,
-    findByName
+    findByName,
+    findAllStats
 };

@@ -23,6 +23,7 @@
 
 <br><br><br><br><br>
 
+<!--Bar chart-->
 <div class="card">
     <p>Export as </p>
     <div class="bottom">
@@ -35,7 +36,9 @@
 <div class="card-bar">
     <div id="chart"></div>
 </div>
+<!--Bar chart END-->
 
+<!--Pie chart-->
 <div class="card">
     <p>Export as </p>
     <div class="bottom">
@@ -49,8 +52,26 @@
     <p>Awards won percentage</p>
     <div class="pie-charts"></div>
 </div>
+<!--Pie chart END-->
+
+<!--Line chart-->
+<div class="card">
+    <p>Export as </p>
+    <div class="bottom">
+        <button onclick="getStatsImage('line', 'svg')">&#10533; SVG</button>
+        <button onclick="getCSV('line')">&#10533; CSV</button>
+        <button onclick="getStatsImage('line', 'webp')">&#10533; WebP</button>
+    </div>
+</div>
+
+<div class="card-line">
+    <p>Number of actors throughout the years</p>
+    <canvas id="won-chart"></canvas>
+</div>
+<!--Line chart END-->
 
 </body>
-<script src="js/barChart.js"></script>
+<script src="js/chartGenerator.js"></script>
 <script src="js/export.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </html>
