@@ -23,8 +23,26 @@
 
 <br><br><br><br><br>
 
+<div class="card">
+    <p>Export as </p>
+    <div class="bottom">
+        <button onclick="getStatsImage('bar', 'svg')">&#10533; SVG</button>
+        <button onclick="getBarCsv()">&#10533; CSV</button>
+        <button onclick="getStatsImage('bar', 'webp')">&#10533; WebP</button>
+    </div>
+</div>
+
 <div class="card-bar">
     <div id="chart"></div>
+</div>
+
+<div class="card">
+    <p>Export as </p>
+    <div class="bottom">
+        <button onclick="getStatsImage('pie', 'svg')">&#10533; SVG</button>
+        <button onclick="getPieCsv()">&#10533; CSV</button>
+        <button onclick="getStatsImage('pie', 'webp')">&#10533; WebP</button>
+    </div>
 </div>
 
 <div class="card-pie">
@@ -34,4 +52,5 @@
 
 </body>
 <script src="js/barChart.js"></script>
+<script src="js/export.js"></script>
 </html>

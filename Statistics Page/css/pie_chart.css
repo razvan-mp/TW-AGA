@@ -24,15 +24,23 @@
 
 .pie-charts {
     display: grid;
-    /*grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));*/
     grid-gap: 2rem;
     justify-items: center;
     grid-template-columns: auto auto auto;
 }
 
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1500px) {
     .pie-charts {
         grid-gap: 0;
         grid-template-columns: auto auto;
+        transform: scale(0.8);
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .pie-charts {
+        grid-gap: 0;
+        grid-template-columns: auto;
+        transform: scale(0.8);
     }
 }
