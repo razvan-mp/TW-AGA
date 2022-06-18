@@ -118,11 +118,22 @@ function findAllStats() {
     })
 }
 
+function findRandomActors() {
+    return new Promise((resolve, reject) => {
+        connection.query("select name from awards.screenactorguildawards where name <> '' and (year like '2020%' or year like '2019%' or year like '2018%') group by name having sum(case when won='True\\r' then 1 else 0 end) > 0 order by rand() limit 0, 10;", function (err, result, fields) {
+            if (err)
+                throw err
+            resolve(result)
+        })
+    })
+}
+
 module.exports = {
     findTopActors,
     findYearsOfAwardsByActor,
     findActors,
     findAll,
     findByName,
-    findAllStats
+    findAllStats,
+    findRandomActors
 };
