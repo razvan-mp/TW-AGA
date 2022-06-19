@@ -74,12 +74,21 @@ body {
 }
 
 .slider .slide .info {
-    position: absolute;
-    background: rgba(0, 0, 0, 0.4);
+    position: relative;
+    background: linear-gradient(0deg, black , transparent);
     color: white;
     width: 100%;
-    padding: 20px 20px 6%;
+    position: absolute;
     bottom: 0;
+    height: auto;
+}
+
+.slider .slide .info a {
+    all: unset;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16pt;
+    padding: 10px;
 }
 
 .slider .slide .info h2 {

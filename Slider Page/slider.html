@@ -6,6 +6,7 @@
     <title>Slider</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/loading.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 </head>
@@ -15,13 +16,23 @@
     <input class="menu-btn" type="checkbox" id="menu-btn"/>
     <label class="menu-icon" for="menu-btn"><span class="nav-icon"></span></label>
     <ul class="menu">
-        <li><a href="Home" class="navbar-button">Home</a></li>
-        <li><a href="News" class="navbar-button">News</a></li>
-        <li><a href="Settings" class="navbar-button">Settings</a></li>
+        <li><a href="../Home page/index.html" class="navbar-button">Home</a></li>
+        <li><a href="slider.html" class="navbar-button">News</a></li>
+        <li><a href="../Statistics Page/statistics.html" class="navbar-button">Statistics</a></li>
+        <li><a href="../User Settings Page/userSettings.html" class="navbar-button">Settings</a></li>
     </ul>
 </header>
 
 <div class="slider" id="slider">
+    <div class="container">
+        <p class="loading">Fetching your news</p>
+        <div class="dashes">
+            <div class="dash first"></div>
+            <div class="dash second"></div>
+            <div class="dash third"></div>
+            <div class="dash fourth"></div>
+        </div>
+      </div>
 </div>
 <script type="text/javascript">
 

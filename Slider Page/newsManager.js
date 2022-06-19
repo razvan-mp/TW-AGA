@@ -10,6 +10,7 @@ function showNews() {
                 console.log(newsList)
 
                 const slider = document.getElementById("slider")
+                slider.innerHTML = ''
                 for (let i = 0; i < newsList.length; i++)
                     if (newsList[i].length > 0)
                         for (let j = 0; j < newsList[i].length; j++) {
@@ -27,6 +28,8 @@ function showNews() {
                                 "        <div class=\"info\">\n" +
                                 "            <a href=\"" + newsList[i][j]['readMoreLink'] + "\">\n" + newsList[i][j]['title'] +
                                 "            </a>\n" +
+                                "            <p>"+ 
+                                "</p>"
                                 "        </div>\n" +
                                 "    </div>"
                         }
@@ -83,7 +86,7 @@ showNews().then( r => {
             }
 
             slides[indexSlide].classList.add("active");
-        }, 3000);
+        }, 15000);
     }
     play();
 
