@@ -64,12 +64,14 @@
         <p>
             Mai jos sunt functionalitatile pe care aplicatia AGA le ofera.
         <ul>
-            <li>Crearea unui cont si inregistrarea unui utilizator</li>
-            <li>Modificarea datelor asociate utilizatorului</li>
-            <li>Alegerea topicelor preferate</li>
+            <li> ? Crearea unui cont si inregistrarea unui utilizator</li>
+            <li> ? Modificarea datelor asociate utilizatorului</li>
+            <li> ? Alegerea topicelor preferate</li>
             <li>Schimbarea temei site-ului</li>
             <li>Vizualizarea stirilor despre actorii nominalizati la SAG</li>
             <li>Cautarea unui actor dupa nume</li>
+            <li>Vizualizarea informatiilor despre actorul cautat</li>
+            <li>Vizualizarea statisticilor despre nominalizarile la SAG</li>
             <li>Exportarea statisticilor si vizualizarilor in formatele <i>CSV</i>, <i>WebP</i> si <i>SVG</i></li>
         </ul>
         </p>
@@ -102,8 +104,8 @@
             placuta utilizatorului datorita design-ului responsive.
         </p>
         <p>
-            De asemenea utilizatorul are posibilitatea sa modifice tema de culori pestabilita a aplicatiei,
-            putand opta pentru o tema intunecata; acest lucru este posibil prin icon-ul din
+            De asemenea utilizatorul are posibilitatea sa modifice tema de culori prestabilita a aplicatiei,
+            putand opta pentru o tema intunecata, acest lucru este posibil prin icon-ul din
             bara de navigare.
         </p>
     </section>
@@ -111,13 +113,14 @@
     <section id="software interfaces">
         <h3>Interfete software</h3>
         <p>
-            Aplicatia este in stansa legatura cu API-ul public oferit de TMDb. La fiecare request
+            Aplicatia este in stansa legatura cu API-ul public oferit de TMDb, si datele de pe Kaggle. La fiecare request
             vor fi atasate topicele si se va face o selectie bazata pe cei mai populari actori, filme
             cu un rating general bun.
         </p>
         <p>
-            Baza de date folosita va fi Oracle deoarece se poate integra usor cu limbajul de programare pentru
-            partea de backend. Un alt motiv fiind suportul gratuit pe platforma OracleCloud, locul unde va fi hostat
+            Baza de date folosita este MySql deoarece se poate integra usor cu limbajul de programare pentru
+            partea de backend. 
+            ?Un alt motiv fiind suportul gratuit pe platforma OracleCloud, locul unde va fi hostat
             backend-ul aplicatiei.
         </p>
         <p>
@@ -137,7 +140,7 @@
         <h3>Interfete de comunicare</h3>
         <p>
             Partea de backend va functiona ca si un REST API, iar partea de frontend va face requesturi catre acesta.
-            Formatul de primire/transmitere al requesturilor va fi CSV.
+            ?Formatul de primire/transmitere al requesturilor va fi CSV.
         </p>
     </section>
 
@@ -162,8 +165,7 @@
         <p>
             Bazat pe criteriile de selectie default si de preferintele utilizatorului in cazul in care acesta este autentificat,
             pagina de acasa va avea screen-uri de cate 6 actori nominalizati la SAG, la scroll urmand inca 6, si asa mai departe.
-            Fiecare panel care contine un user va avea un buton de "Read More", astfel utilizatorul putand vedea mai multe
-            informatii despre actor, stiri despre acesta, etc. Pagina de acasa ofera usurinta in navigare, utilizatorul putand sa 
+            Utilizatorul poate vedea mai multe informatii despre actor, apasand pe pe fiecare actor. Pagina de acasa ofera usurinta in navigare, utilizatorul putand sa 
             caute un actor (in bara de search), sau sa foloseasca bara de navigare pentru a ajunge in oricare din celelalte pagini
             (Setari, Stiri, Statistici).
             <img style="height:459px;width:816px;" class="image" alt="login" src="img/home.png">
@@ -199,8 +201,8 @@
     <section id="statistics">
         <h3>Pagina de statistici</h3>
         <p>
-            Utilizatorul va vedea statistici referitoare la <i>Cel mai cautat actor</i>, <i>Cea mai urmarita categorie</i>,
-            <i>Stirile cele mai vizionate</i> printr-o interfata primitoare. El va putea sa exporte staticticile oferite in 
+            Utilizatorul va vedea statistici referitoare la <i>Cei mai premiati actori</i>, <i>Procentul de premii castigate</i>,
+            <i>Numarul de total de nominalizari</i>, <i>Numarul de total de castigatori</i> si <i>Numarul de total de pierzatori</i> printr-o interfata primitoare. El va putea sa exporte staticticile oferite in 
             3 formate si anume <i>CSV</i>, <i>WebP</i> si <i>SVG</i> prin apasarea butonului "Exporta ca" si 
             alegerea unui format.
 
@@ -225,8 +227,16 @@
             Structurarea datelor va fi realizata intr-o singura baza de date, formata din doua tabele;
             unul dintre ele va contine informatiile utilizatorilor (username, e-mail, parola), preferintele lor
             (categorii selectate, surse de stiri). Celalalt va contine datele din CSV-ul de pe site-ul
-            <a href="https://www.kaggle.com/unanimad/screen-actors-guild-awards">SAG Awards</a>, din care 
-            se vor forma seed-uri pentru API.
+            <a href="https://www.kaggle.com/unanimad/screen-actors-guild-awards">SAG Awards</a>, inserandu-se
+            datele BULK folosind un script ce poate fi executat oricand in python.
+        </p>
+    </section>
+
+    <section id="securitate">
+        <h3>Securitatea</h3>
+        <p>
+            Modelul asigura securitatea impotriva unui atac de tip SQL Injection, facand conversia datelor primitoare
+            de la utilizator.
         </p>
     </section>
 
@@ -234,7 +244,7 @@
         <h3>Structurarea codului</h3>
         <p>
             Aplicatia se va folosi de arhitectura MVC; modelul se va ocupa cu datele din baza 
-            de date PostreSQL, controller-ul va face request-urile, iar view-ul va prezenta rezultatul.
+            de date MySql, controller-ul va face request-urile, iar view-ul va prezenta rezultatul.
         </p>
         <img style="height:315;width:816px;" class="image" alt="login" src="img/diagrama_mvc.png">
         <p>
@@ -256,6 +266,7 @@
         toate rezultatele posibile. Totusi, ca metoda de fallback, va fi creata o pagina de eroare
         de tip <i>500 - Internal Server Error</i>, pentru a gestiona cazurile neprevazute.
     </section>
+
 </section>
 
 </body>
