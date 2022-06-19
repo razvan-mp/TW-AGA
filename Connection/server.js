@@ -10,6 +10,7 @@ const {
     getActor,
     getAllTimeStats
 } = require('./controller/awardController')
+const {getNews} = require("./controller/newsController");
 
 const server = http.createServer((req, res) => {
 
@@ -57,6 +58,10 @@ const server = http.createServer((req, res) => {
         })
     } else if (req.url === '/api/all_time' && req.method === 'GET') {
         getAllTimeStats(req, res).then(r => {
+            return r
+        })
+    } else if(req.url === '/api/news' && req.method === 'GET') {
+        getNews(req, res).then(r => {
             return r
         })
     } else {
