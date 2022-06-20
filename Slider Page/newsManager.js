@@ -1,106 +1,119 @@
 function showYahooNews() {
   return new Promise((resolve, reject) => {
-    if (getCookie("yahoo") !== "1" && getCookie("tmz") === "1") resolve("");
+    if (getCookie("yahoo") !== "1" && getCookie("tmz") === "1") {
+      console.log(
+        "tmz: " + getCookie("tmz") + " hehe yahoo: " + getCookie("yahoo")
+      );
+      resolve("");
+    } else {
+      console.log("showing yahoo...");
+      let requestURL = "http://localhost:5000/api/news/yahoo";
+      let request = new XMLHttpRequest();
+      request.open("GET", requestURL, true);
+      request.send();
+      request.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+          let newsList = JSON.parse(request.responseText);
+          console.log(newsList);
 
-    let requestURL = "http://localhost:5000/api/news/yahoo";
-    let request = new XMLHttpRequest();
-    request.open("GET", requestURL, true);
-    request.send();
-    request.onreadystatechange = function () {
-      if (this.readyState === 4 && this.status === 200) {
-        let newsList = JSON.parse(request.responseText);
-        console.log(newsList);
+          const slider = document.getElementById("slider");
+          for (let i = 0; i < newsList.length; i++)
+            if (newsList[i].length > 0)
+              for (let j = 0; j < newsList[i].length; j++) {
+                let image;
+                if (
+                  newsList[i][j]["imageLink"].startsWith("https://s.yimg.com")
+                ) {
+                  let oldImageLink = newsList[i][j]["imageLink"];
+                  let indexOfImage = oldImageLink.indexOf(
+                    "https",
+                    oldImageLink.indexOf("https") + 1
+                  );
+                  image = oldImageLink.substring(
+                    indexOfImage,
+                    oldImageLink.length
+                  );
+                } else image = newsList[i][j]["imageLink"];
 
-        const slider = document.getElementById("slider");
-        for (let i = 0; i < newsList.length; i++)
-          if (newsList[i].length > 0)
-            for (let j = 0; j < newsList[i].length; j++) {
-              let image;
-              if (
-                newsList[i][j]["imageLink"].startsWith("https://s.yimg.com")
-              ) {
-                let oldImageLink = newsList[i][j]["imageLink"];
-                let indexOfImage = oldImageLink.indexOf(
-                  "https",
-                  oldImageLink.indexOf("https") + 1
-                );
-                image = oldImageLink.substring(
-                  indexOfImage,
-                  oldImageLink.length
-                );
-              } else image = newsList[i][j]["imageLink"];
-
-              slider.innerHTML +=
-                '<div class="slide">\n' +
-                '        <img src="' +
-                image +
-                '" alt="404">\n' +
-                '        <div class="info">\n' +
-                '            <a href="' +
-                newsList[i][j]["readMoreLink"] +
-                '">\n' +
-                newsList[i][j]["title"] +
-                "            </a>\n" +
-                "            <p>" +
-                "</p>";
-              "        </div>\n" + "    </div>";
-            }
-        resolve("");
-      }
-    };
+                slider.innerHTML +=
+                  '<div class="slide">\n' +
+                  '        <img src="' +
+                  image +
+                  '" alt="404">\n' +
+                  '        <div class="info">\n' +
+                  '            <a href="' +
+                  newsList[i][j]["readMoreLink"] +
+                  '">\n' +
+                  newsList[i][j]["title"] +
+                  "            </a>\n" +
+                  "            <p>" +
+                  "</p>";
+                "        </div>\n" + "    </div>";
+              }
+          resolve("");
+        }
+      };
+    }
   });
 }
 
 function showTMZNews() {
   return new Promise((resolve, reject) => {
-    if (getCookie("tmz") !== "1" && getCookie("yahoo") === "1") resolve("");
+    if (getCookie("tmz") !== "1" && getCookie("yahoo") === "1") {
+      console.log(
+        "tmz: " + getCookie("tmz") + " hehe yahoo: " + getCookie("yahoo")
+      );
+      resolve("");
+    } else {
+      console.log("showing tmz...");
 
-    let requestURL = "http://localhost:5000/api/news/tmz";
-    let request = new XMLHttpRequest();
-    request.open("GET", requestURL, true);
-    request.send();
-    request.onreadystatechange = function () {
-      if (this.readyState === 4 && this.status === 200) {
-        let newsList = JSON.parse(request.responseText);
-        console.log(newsList);
+      let requestURL = "http://localhost:5000/api/news/tmz";
+      let request = new XMLHttpRequest();
+      request.open("GET", requestURL, true);
+      request.send();
+      request.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+          let newsList = JSON.parse(request.responseText);
+          console.log(newsList);
 
-        const slider = document.getElementById("slider");
-        for (let i = 0; i < newsList.length; i++)
-          if (newsList[i].length > 0)
-            for (let j = 0; j < newsList[i].length; j++) {
-              let image;
-              if (
-                newsList[i][j]["imageLink"].startsWith("https://s.yimg.com")
-              ) {
-                let oldImageLink = newsList[i][j]["imageLink"];
-                let indexOfImage = oldImageLink.indexOf(
-                  "https",
-                  oldImageLink.indexOf("https") + 1
-                );
-                image = oldImageLink.substring(
-                  indexOfImage,
-                  oldImageLink.length
-                );
-              } else image = newsList[i][j]["imageLink"];
+          const slider = document.getElementById("slider");
+          for (let i = 0; i < newsList.length; i++)
+            if (newsList[i].length > 0)
+              for (let j = 0; j < newsList[i].length; j++) {
+                let image;
+                if (
+                  newsList[i][j]["imageLink"].startsWith("https://s.yimg.com")
+                ) {
+                  let oldImageLink = newsList[i][j]["imageLink"];
+                  let indexOfImage = oldImageLink.indexOf(
+                    "https",
+                    oldImageLink.indexOf("https") + 1
+                  );
+                  image = oldImageLink.substring(
+                    indexOfImage,
+                    oldImageLink.length
+                  );
+                } else image = newsList[i][j]["imageLink"];
 
-              slider.innerHTML +=
-                '<div class="slide">\n' +
-                '        <img src="' +
-                image +
-                '" alt="404">\n' +
-                '        <div class="info">\n' +
-                '            <a href="' +
-                newsList[i][j]["readMoreLink"] +
-                '">\n' +
-                newsList[i][j]["title"] +
-                "            </a>\n" +
-                "            <p>" +
-                "</p>";
-              "        </div>\n" + "    </div>";
-            }
-        resolve("");
-      }
-    };
+                slider.innerHTML +=
+                  '<div class="slide">\n' +
+                  '        <img src="' +
+                  image +
+                  '" alt="404">\n' +
+                  '        <div class="info">\n' +
+                  '            <a href="' +
+                  newsList[i][j]["readMoreLink"] +
+                  '">\n' +
+                  newsList[i][j]["title"] +
+                  "            </a>\n" +
+                  "            <p>" +
+                  "</p>";
+                "        </div>\n" + "    </div>";
+              }
+          resolve("");
+        }
+      };
+    }
   });
 }
 
@@ -169,9 +182,13 @@ function addSliderControls() {
   });
 }
 
-Promise.all([getYahooNews(), getTMZNews()]).then((r) => {
-    addSliderControls();
-})
+const promises = [];
+promises.push(showYahooNews());
+promises.push(showTMZNews());
+
+Promise.all(promises).then((r) => {
+  addSliderControls();
+});
 
 function getCookie(cname) {
   let name = cname + "=";

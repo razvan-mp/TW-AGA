@@ -59,3 +59,11 @@ function getCookie(cname) {
     }
     return "";
 }
+
+if (getCookie('yahoo') === '1') {
+    document.getElementById('firstItem').classList.add('item-is-selected')
+}
+
+if (getCookie('tmz') === '1') {
+    document.getElementById('secondItem').classList.add('item-is-selected')
+}
