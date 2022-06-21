@@ -6,10 +6,13 @@
     <title>Setarile contului</title>
     <link type="text/css" rel="stylesheet" href="css/style.css">
     <link type="text/css" rel="stylesheet" href="css/navbar.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/svg-with-js.min.css" rel="stylesheet" />
 </head>
 
 <body>
-
+    <div class="body-blackout"></div>
     <header class="header">
         <a href="/" class="logo">AGA</a>
         <input class="menu-btn" type="checkbox" id="menu-btn" />
@@ -22,167 +25,52 @@
         </ul>
     </header>
 
-    <div class="main-page">
-        <div id="id01" class="modal">
-
-            <form class="modal-content" method="post">
-
-                <div class="modal-images">
-
-                    <img src="media/avatar_1.png" alt="Avatar number 1">
-                    <img src="media/avatar_2.png" alt="Avatar number 2">
-                    <img src="media/avatar_3.png" alt="Avatar number 3">
-                    <img src="media/avatar_4.png" alt="Avatar number 4">
-                    <img src="media/avatar_1.png" alt="Avatar number 1">
-                    <img src="media/avatar_2.png" alt="Avatar number 2">
-                    <img src="media/avatar_3.png" alt="Avatar number 3">
-                    <img src="media/avatar_4.png" alt="Avatar number 4">
-                </div>
-
-                <div class="modal-buttons">
-
-                    <button class="bounce-button" onclick=hideChoiceBar()>
-                        <span>Cancel</span>
-                    </button>
-                    <button class="bounce-button"><span>Apply</span></button>
-
-                </div>
-            </form>
-        </div>
-
-        <div class="main-grid">
-            <div class="grid-item interior-grid-left">
-
-                <div class="interior-grid-item upper-left">
-                    <div class="circle">
-                        <img src="media/avatar_4.png" alt="Avatar number 4">
+    <div class="parent">
+        <div class="card-top">
+            <div class="card">
+                <div class="profilepic" data-popup-trigger="orice" onclick="console.log('clicked')">
+                    <img class="profilepic__image" src="https://images.unsplash.com/photo-1510227272981-87123e259b17?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=3759e09a5b9fbe53088b23c615b6312e" width="150" height="150" alt="Profibild" />
+                    <div class="profilepic__content">
+                        <span class="profilepic__icon"><i class="fas fa-camera"></i></span>
+                        <span class="profilepic__text">Edit Profile</span>
                     </div>
-
-                    <button class="bounce-button" onclick=displayChoiceBar()>
-                        <span>Change avatar</span>
-                    </button>
                 </div>
-
-                <div class="interior-grid-item lower-left">
-                    <div class="grid-preferences">
-
-                        <form id="username-form">
-                            <label>
-                                <input type="text" class="user-info-input" id="username" placeholder="Username">
-                            </label>
-                        </form>
-                        <button type="submit" form="username-form" class="submit-info-button"><span>Submit
-                            </span></button>
-
-                        <form id="email-form">
-                            <label>
-                                <input type="email" class="user-info-input" id="email" placeholder="E-mail">
-                            </label>
-                        </form>
-                        <button type="submit" form="email-form" class="submit-info-button"><span>Submit </span></button>
-
-                        <form id="password-form">
-                            <label>
-                                <input type="password" class="user-info-input" id="password" placeholder="Password">
-                            </label>
-                        </form>
-                        <button type="submit" value="submit" form="password-form" class="submit-info-button">
-                            <span>Submit</span></button>
-
-
-                        <form id="password-confirmation-form">
-                            <label>
-                                <input type="password" class="user-info-input" id="confirm-password"
-                                    placeholder="Confirm password">
-                            </label>
-                        </form>
-                        <button type="submit" form="password-confirmation-form" class="submit-info-button">
-                            <span>Submit</span></button>
-                    </div>
-
+                <div class="user-data">
+                    <form id="username-form">
+                        <label>
+                            <input type="text" class="user-info-input" id="username" placeholder="Username">
+                        </label>
+                    </form>
+                    <button type="submit" form="username-form" class="submit-info-button"><span>Submit </span></button>
                 </div>
             </div>
-
-            <div class="grid-item interior-grid-right">
-                <div class="interior-grid-item upper-right">
-                    <div class="news-sources-item" id="firstItem" onclick="setCookie('yahoo', 10)">
-                        <span>Yahoo! News</span>
-                    </div>
-                    <div class="news-sources-item" id="secondItem" onclick="setCookie('tmz', 10)">
-                        <span>TMZ News</span>
-                    </div>
-                    <div class="news-sources-item" id="thirdItem">
-                        <span>Yahoo! News</span>
-                    </div>
-
-                </div>
-                <div class="interior-grid-item lower-right">
-                    <div class="grid-preferences">
-                        <div class="checkbox-label">
-                            <input type="checkbox" name="comedy">
-                            <span>comedy</span>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" name="drama">
-                            <span>drama</span>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" name="tv_show">
-                            <span>TV show</span>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" name="film">
-                            <span>film</span>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" name="supporting_role">
-                            <span>supporting role</span>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" name="leading_role">
-                            <span>leading role</span>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" name="motion_picture">
-                            <span>motion picture</span>
-                        </div>
-                        <div class="checkbox-label">
-                            <input type="checkbox" name="mini_series">
-                            <span>mini series</span>
-                        </div>
-                    </div>
-                </div>
+        </div>
+        <div class="card-left">
+            <div class="card">content</div>
+        </div>
+        <div class="card-right">
+            <div class="card">content</div>
+        </div>
+    </div>
+    <div id="modals">
+        <div class='popup-modal' data-popup-modal="orice">
+            <i class='popup-modal__close'></i>
+            <h3>Choose your avatar</h3>
+            <div class="image-grid">
+                <img src="media/avatar_1.png" alt="Avatar number 1">
+                <img src="media/avatar_2.png" alt="Avatar number 2">
+                <img src="media/avatar_3.png" alt="Avatar number 3">
+                <img src="media/avatar_4.png" alt="Avatar number 4">
+                <img src="media/avatar_1.png" alt="Avatar number 1">
+                <img src="media/avatar_2.png" alt="Avatar number 2">
+                <img src="media/avatar_3.png" alt="Avatar number 3">
+                <img src="media/avatar_4.png" alt="Avatar number 4">
             </div>
         </div>
     </div>
 
-    <script>
-        id01.addEventListener('click', () => {
-            id01.style.display = 'block';
-        });
-
-        const modal = document.getElementById("id01");
-
-        window.onclick = function (event) {
-
-            if (event.target === modal) {
-
-                modal.style.display = "none";
-            }
-        }
-
-        function displayChoiceBar() {
-
-            document.getElementById('id01').style.display = 'block';
-        }
-
-        function hideChoiceBar() {
-
-            document.getElementById('id01').style.display = 'none';
-        }
-
-    </script>
-    <script src="js/cookieManager.js"></script>
+<!--    <script src="js/cookieManager.js"></script>-->
+    <script src="js/modal.js"></script>
 </body>
 
 </html>
