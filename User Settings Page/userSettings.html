@@ -6,6 +6,7 @@
     <title>Setarile contului</title>
     <link type="text/css" rel="stylesheet" href="css/style.css">
     <link type="text/css" rel="stylesheet" href="css/navbar.css">
+    <link type="text/css" rel="stylesheet" href="css/checklist.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/svg-with-js.min.css" rel="stylesheet" />
@@ -46,10 +47,26 @@
             </div>
         </div>
         <div class="card-left">
-            <div class="card">content</div>
+            <div class="card">
+                <div class="news-sources-item" id="firstItem" onclick="setCookie('yahoo', 10)">
+                    <span>Yahoo! News</span>
+                </div>
+                <div class="news-sources-item" id="secondItem" onclick="setCookie('tmz', 10)">
+                    <span>TMZ News</span>
+                </div>
+            </div>
         </div>
         <div class="card-right">
-            <div class="card">content</div>
+            <div class="card">
+                <div id="checklist">
+                    <input id="01" type="checkbox" name="r" value="1" checked>
+                    <label for="01">option1</label>
+                    <input id="02" type="checkbox" name="r" value="2">
+                    <label for="02">option2</label>
+                    <input id="03" type="checkbox" name="r" value="3">
+                    <label for="03">option3</label>
+                </div>
+            </div>
         </div>
     </div>
     <div id="modals">
@@ -69,7 +86,7 @@
         </div>
     </div>
 
-<!--    <script src="js/cookieManager.js"></script>-->
+    <script src="js/cookieManager.js"></script>
     <script src="js/modal.js"></script>
 </body>
 
