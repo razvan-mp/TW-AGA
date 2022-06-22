@@ -73,6 +73,14 @@ const server = http.createServer((req, res) => {
     getActorsByCategory(req.url.split("/")[3], res).then((r) => {
       return r;
     })
+  } else if (req.url === "/api/auth/register" && req.method === "POST") {
+    registerUser(req, res).then((r) => {
+      return r;
+    })
+  } else if (req.url === "/api/auth/login" && req.method === "POST") {
+    loginUser(req, res).then((r) => {
+      return r;
+    })
   }
   else {
     res.writeHead(404, { "Content-Type": "application/json" });
