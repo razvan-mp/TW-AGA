@@ -12,7 +12,7 @@ const {
   getActorsByCategory,
 } = require("./controller/awardController");
 const { getYahooNews, getTMZNews } = require("./controller/newsController");
-const {registerUser, loginUser} = require("./controller/authController")
+const {updatePreference, registerUser, loginUser} = require("./controller/userController")
 
 const server = http.createServer((req, res) => {
   // if(req.url === '/api/awards' && req.method === 'GET') {
@@ -80,6 +80,11 @@ const server = http.createServer((req, res) => {
     })
   } else if (req.url === "/api/auth/login" && req.method === "POST") {
     loginUser(req, res).then((r) => {
+      return r;
+    })
+  }
+  else if (req.url.startsWith("/api/preference") && req.method === "POST") {
+    updatePreference(req, res).then((r) => {
       return r;
     })
   }

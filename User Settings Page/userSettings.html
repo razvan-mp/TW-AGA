@@ -59,15 +59,15 @@
         <div class="card-right">
             <div class="card">
                 <div id="checklist">
-                    <input id="01" type="checkbox" name="r" value="1" onclick="setCookie('01')">
+                    <input id="01" type="checkbox" name="r" value="1" onclick="setCookie('01'); setPreference('01');">
                     <label for="01">Female actor in a leading role</label>
-                    <input id="02" type="checkbox" name="r" value="2" onclick="setCookie('02')">
+                    <input id="02" type="checkbox" name="r" value="2" onclick="setCookie('02'); setPreference('02');">
                     <label for="02">Male actor in a leading role</label>
-                    <input id="03" type="checkbox" name="r" value="3" onclick="setCookie('03')">
+                    <input id="03" type="checkbox" name="r" value="3" onclick="setCookie('03'); setPreference('03');">
                     <label for="03">Female actor in a supporting role</label>
-                    <input id="04" type="checkbox" name="r" value="4" onclick="setCookie('04')">
+                    <input id="04" type="checkbox" name="r" value="4" onclick="setCookie('04'); setPreference('04');">
                     <label for="04">Male actor in a supporting role</label>
-                    <input id="05" type="checkbox" name="r" value="5" onclick="setCookie('05')">
+                    <input id="05" type="checkbox" name="r" value="5" onclick="setCookie('05'); setPreference('05');">
                     <label for="05">Cast in a motion picture</label>
                 </div>
             </div>
@@ -93,6 +93,7 @@
     <script src="js/cookieManager.js"></script>
     <script src="js/modal.js"></script>
     <script src="../global_js/jwtParser.js"></script>
+    <script src="js/preferenceManager.js"></script>
 </body>
 
 </html>
