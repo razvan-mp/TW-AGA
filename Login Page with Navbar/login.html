@@ -1,69 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Login - Awards</title>
-    <link rel="stylesheet" href="login.css">
+    <link type="text/css" rel="stylesheet" href="css/login.css">
+    <link type="text/css" rel="stylesheet" href="css/navbar.css">
 </head>
+
 <body>
 
-<ul class="navbar">
-    <li><a class="active" href="#">Acasă</a></li>
-    <li><a href="../Slider Page/slider.html">Știri</a></li>
-    <li><a href="#">Statistici</a></li>
-    <li class="right"><a href="../User Settings Page/userSettings.html">
-        Setări
-    </a></li>
-</ul>
+    <header class="header">
+        <a href="/" class="logo">AGA</a>
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class="menu-icon" for="menu-btn"><span class="nav-icon"></span></label>
+        <ul class="menu">
+            <li><a href="../Home%20page/index.html" class="navbar-button">Home</a></li>
+            <li><a href="../Slider%20Page/slider.html" class="navbar-button">News</a></li>
+            <li><a href="../Statistics%20Page/statistics.html" class="navbar-button">Statistics</a></li>
+            <li><a href="../User%20Settings%20Page/userSettings.html" class="navbar-button">Settings</a></li>
+        </ul>
+    </header>
 
-<div class="container" id="container">
-    <div class="form-container sign-up-container">
-        <form action="#">
-            <h1>Create Account</h1>
-            <input type="text" placeholder="Name" tabindex="-1"/>
-            <input type="email" placeholder="E-mail" tabindex="-1"/>
-            <input type="password" placeholder="Password" tabindex="-1"/>
-            <button tabindex="-1">Sign up</button>
-        </form>
-    </div>
-    <div class="form-container sign-in-container">
-        <form action="#">
-            <h1>Sign in</h1>
-            <input type="email" placeholder="E-mail" tabindex="-1"/>
-            <input type="password" placeholder="Password" tabindex="-1"/>
-            <a href="#" tabindex="-1">Forgot your password?</a>
-            <button tabindex="-1">Sign in</button>
-        </form>
-    </div>
-    <div class="overlay-container">
-        <div class="overlay">
-            <div class="overlay-panel overlay-left right-panel-active">
-                <h1>Welcome back!</h1>
-                <p>To be able to see your history and customize stuff please log in</p>
-                <button class="ghost" id="SignIn" tabindex="-1">Sign In</button>
+    <div class="main-container">
+        <div class="container" id="container">
+            <div class="form-container sign-up-container">
+                <form onsubmit="event.preventDefault(); handleSignUp()" id="sign-up-form">
+                    <h1>Create Account</h1>
+                    <input name="name" type="text" placeholder="Name" tabindex="-1" required />
+                    <input name="email" type="email" placeholder="E-mail" tabindex="-1" required />
+                    <input name="password" type="password" placeholder="Password" tabindex="-1" required />
+                    <button type="submit" tabindex="-1">Sign up</button>
+                </form>
             </div>
-            <div class="overlay-panel overlay-right right-panel-active">
-                <h1>Hello!</h1>
-                <p>Enter your info and create an account to be able to save history and customize stuff</p>
-                <button class="ghost" id="SignUp" tabindex="-1">Sign Up</button>
+            <div class="form-container sign-in-container">
+                <form onsubmit="event.preventDefault(); handleLogIn();" id="log-in-form">
+                    <h1>Log in</h1>
+                    <input name="email" type="email" placeholder="E-mail" tabindex="-1" />
+                    <input name="password" type="password" placeholder="Password" tabindex="-1" />
+                    <button type="submit" tabindex="-1">Log in</button>
+                </form>
+            </div>
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-left right-panel-active">
+                        <h1>Welcome back!</h1>
+                        <p>To be able to customize your experience please log in</p>
+                        <button class="ghost" id="SignIn" tabindex="-1">Sign In</button>
+                    </div>
+                    <div class="overlay-panel overlay-right right-panel-active">
+                        <h1>Hello!</h1>
+                        <p>Enter your info and create an account to be able to customize your experience</p>
+                        <button class="ghost" id="SignUp" tabindex="-1">Sign Up</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    const signUpButton = document.getElementById('SignUp');
-    const signInButton = document.getElementById('SignIn');
-    const container = document.getElementById('container');
-
-    signUpButton.addEventListener('click', () => {
-        container.classList.add("right-panel-active");
-    });
-
-    signInButton.addEventListener('click', () => {
-        container.classList.remove("right-panel-active");
-    });
-</script>
-
+    
 </body>
+<script src="js/loginBoxAnimate.js"></script>
+<script src="js/loginHandler.js"></script>
 </html>

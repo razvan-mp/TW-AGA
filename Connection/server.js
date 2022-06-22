@@ -12,6 +12,7 @@ const {
   getActorsByCategory,
 } = require("./controller/awardController");
 const { getYahooNews, getTMZNews } = require("./controller/newsController");
+const {registerUser, loginUser} = require("./controller/authController")
 
 const server = http.createServer((req, res) => {
   // if(req.url === '/api/awards' && req.method === 'GET') {
@@ -71,6 +72,14 @@ const server = http.createServer((req, res) => {
     });
   } else if (req.url.match("/api/awards/(0[0-9])(&0[0-9])*") && req.method === "GET") {
     getActorsByCategory(req.url.split("/")[3], res).then((r) => {
+      return r;
+    })
+  } else if (req.url === "/api/auth/register" && req.method === "POST") {
+    registerUser(req, res).then((r) => {
+      return r;
+    })
+  } else if (req.url === "/api/auth/login" && req.method === "POST") {
+    loginUser(req, res).then((r) => {
       return r;
     })
   }
