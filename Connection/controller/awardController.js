@@ -203,6 +203,27 @@ async function getActor(actorName, res) {
     }
 }
 
+async function getActorsByCategory(category, res) {
+    res.writeHead(200, {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+    });
+    try {
+        const actors = await Awards.findActorsByCategory(category);
+        res.writeHead(200, {
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+        })
+        console.log(actors)
+        res.end(JSON.stringify(actors))
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 async function getAllTimeStats(req, res) {
     res.writeHead(200, {
         "Content-Type": "application/json",
@@ -250,6 +271,7 @@ module.exports = {
     getAwards,
     getActor,
     getTopActors,
-    getAllTimeStats
+    getAllTimeStats,
+    getActorsByCategory
     // getIfIsInTop
 }

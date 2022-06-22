@@ -128,6 +128,72 @@ function findRandomActors() {
     })
 }
 
+function findActorsByCategory(category) {
+    return new Promise((resolve, reject) => {
+        let sqlFilters = "where "
+        let categoriesList = []
+        if(category.includes("&"))
+            categoriesList = category.split('&')
+        else {
+            categoriesList[0] = category
+        }
+
+        let toUnion = 0, hasMotionMovieCategory = 0;
+        let sqlFilters05 = "";
+        for (let i = 0; i < categoriesList.length; i++) {
+            switch(categoriesList[i]) {
+                case "01": {
+                    if(i > 0)
+                        sqlFilters += ' or '
+                    sqlFilters += "category='Female actor in a leading role'"
+                    toUnion = 1
+                    break;
+                }
+                case "02": {
+                    if(i > 0)
+                        sqlFilters += ' or '
+                    sqlFilters += "category='Male actor in a leading role'"
+                    toUnion = 1
+                    break;
+                }
+                case "03": {
+                    if(i > 0)
+                        sqlFilters += ' or '
+                    sqlFilters += "category='Female actor in a supporting role'"
+                    toUnion = 1
+                    break;
+                }
+                case "04": {
+                    if(i > 0)
+                        sqlFilters += ' or '
+                    sqlFilters += "category='Male actor in a supporting role' "
+                    toUnion = 1
+                    break;
+                }
+                case "05": {
+                    sqlFilters05 = "category='Cast in a motion picture'"
+                    hasMotionMovieCategory = 1;
+                    break;
+                }
+            }
+        }
+
+        let sqlQuery;
+        if(toUnion === 1 && hasMotionMovieCategory === 1)
+            sqlQuery = "select * from ScreenActorGuildAwards " + sqlFilters + " union all (select * from ScreenActorGuildAwards where " + sqlFilters05 + " limit 40)"
+        else
+            sqlQuery = "select * from ScreenActorGuildAwards " + sqlFilters + sqlFilters05;
+
+        console.log(sqlQuery)
+
+        connection.query(sqlQuery + " order by rand()", function (err, result, fields) {
+            if (err)
+                throw err
+            resolve(result)
+        })
+    })
+}
+
 module.exports = {
     findTopActors,
     findYearsOfAwardsByActor,
@@ -135,5 +201,6 @@ module.exports = {
     findAll,
     findByName,
     findAllStats,
-    findRandomActors
+    findRandomActors,
+    findActorsByCategory
 };

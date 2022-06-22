@@ -1,14 +1,49 @@
 let actorList = []
-const requestURL = "http://localhost:5000/api/awards"
+let requestURL = "http://localhost:5000/api/awards"
 const movieRequestURL = "https://api.themoviedb.org/3/search/person?api_key=01d27a60012da6c4514d0865a5e025e3&query="
 const imgPath = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2"
 
+function getCookie(cname) {
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
 function showAllActors() {
+    console.log("show all actors:")
+    let cookies = []
+    cookies[0] = parseInt(getCookie("01"))
+    cookies[1] = parseInt(getCookie("02"))
+    cookies[2] = parseInt(getCookie("03"))
+    cookies[3] = parseInt(getCookie("04"))
+    cookies[4] = parseInt(getCookie("05"))
+
+    let requestCategory = ''
+    for (let i = 0; i < 5; i++) {
+        if(cookies[i] === 1)
+            if(requestCategory === '')
+                requestCategory += '0' + (i + 1).toString()
+            else requestCategory += '&0' + (i + 1).toString()
+    }
+
+    if(requestCategory !== '')
+        requestURL += '/' + requestCategory
+
     let xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", requestURL, true);
     xmlHttp.send();
 
     xmlHttp.onreadystatechange = function () {
+        console.log("in function")
         if (this.readyState === 4 && this.status === 200) {
             actorList = JSON.parse(xmlHttp.responseText)
             const actorsSection = document.getElementById('actors')

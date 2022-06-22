@@ -85,11 +85,11 @@
     animation: check-02 0.4s ease forwards;
 }
 #checklist input[type="checkbox"]:checked + label {
-    color: var(--disabled);
+    /*color: var(--disabled);*/
     animation: move 0.3s ease 0.1s forwards;
 }
 #checklist input[type="checkbox"]:checked + label::before {
-    background: var(--disabled);
+    /*background: var(--disabled);*/
     animation: slice 0.4s ease forwards;
 }
 #checklist input[type="checkbox"]:checked + label::after {

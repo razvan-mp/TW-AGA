@@ -9,6 +9,7 @@ const {
   updateAward,
   getActor,
   getAllTimeStats,
+  getActorsByCategory,
 } = require("./controller/awardController");
 const { getYahooNews, getTMZNews } = require("./controller/newsController");
 
@@ -68,7 +69,12 @@ const server = http.createServer((req, res) => {
     getTMZNews(req, res).then((r) => {
       return r;
     });
-  } else {
+  } else if (req.url.match("/api/awards/(0[0-9])(&0[0-9])*") && req.method === "GET") {
+    getActorsByCategory(req.url.split("/")[3], res).then((r) => {
+      return r;
+    })
+  }
+  else {
     res.writeHead(404, { "Content-Type": "application/json" });
     res.end(JSON.stringify({ message: "Route not found" }));
   }

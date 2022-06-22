@@ -1,6 +1,5 @@
 function setCookie(cname, exdays) {
     let cvalue;
-
     switch (cname) {
         case "yahoo": {
             // update cookie
@@ -36,6 +35,18 @@ function setCookie(cname, exdays) {
             }
             break
         }
+        case "01":
+        case "02":
+        case "03":
+        case "04":
+        case "05":
+        case "06":{
+            console.log("cookie")
+            if(document.getElementById(cname).checked) {
+                cvalue = 1;
+            }
+            else cvalue = 0;
+        }
     }
 
     const d = new Date();
@@ -66,4 +77,24 @@ if (getCookie('yahoo') === '1') {
 
 if (getCookie('tmz') === '1') {
     document.getElementById('secondItem').classList.add('item-is-selected')
+}
+
+if(getCookie('01') === '1') {
+    document.getElementById('01').checked = 1;
+}
+
+if(getCookie('02') === '1') {
+    document.getElementById('02').checked = 1;
+}
+
+if(getCookie('03') === '1') {
+    document.getElementById('03').checked = 1;
+}
+
+if(getCookie('04') === '1') {
+    document.getElementById('04').checked = 1;
+}
+
+if(getCookie('05') === '1') {
+    document.getElementById('05').checked = 1;
 }
