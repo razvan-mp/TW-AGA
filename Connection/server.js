@@ -12,6 +12,7 @@ const {
   getActorsByCategory,
 } = require("./controller/awardController");
 const { getYahooNews, getTMZNews } = require("./controller/newsController");
+const {registerUser, loginUser} = require("./controller/authController")
 
 const server = http.createServer((req, res) => {
   // if(req.url === '/api/awards' && req.method === 'GET') {
