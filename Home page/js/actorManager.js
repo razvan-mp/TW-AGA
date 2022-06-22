@@ -68,7 +68,8 @@ function showAllActors() {
                                 actorName += ' 🏆'
                             let actorImageURL = imgPath + movieResponse['results'][0]['profile_path']
                             let awardYear = actorList[actor]["Year"].split(' ')[0]
-                            let awardCategory = actorList[actor]["Category"].charAt(1) + actorList[actor]["Category"].substring(2).toLowerCase()
+                            let category = actorList[actor]["Category"].trim()
+                            let awardCategory = category.charAt(0) + category.substring(1).toLowerCase()
                             let showName = actorList[actor]["Show_Name"].toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.substring(1)).join(' ')
 
                             if (lazy > 0) {
@@ -213,7 +214,8 @@ function searchActor() {
                                 actorName += ' 🏆'
                             let actorImageURL = imgPath + movieResponse['results'][0]['profile_path']
                             let awardYear = actorList[actor]["Year"].split(' ')[0]
-                            let awardCategory = actorList[actor]["Category"].charAt(1) + actorList[actor]["Category"].substring(2).toLowerCase()
+                            let category = actorList[actor]["Category"].trim()
+                            let awardCategory = category.charAt(0) + category.substring(1).toLowerCase()
                             let showName = actorList[actor]["Show_Name"].toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.substring(1)).join(' ')
 
                             document.getElementById('actors').innerHTML += "<li>\n" +
