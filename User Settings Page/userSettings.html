@@ -7,6 +7,7 @@
     <link type="text/css" rel="stylesheet" href="css/style.css">
     <link type="text/css" rel="stylesheet" href="css/navbar.css">
     <link type="text/css" rel="stylesheet" href="css/checklist.css">
+    <link type="text/css" rel="stylesheet" href="css/divider.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/svg-with-js.min.css" rel="stylesheet" />
@@ -29,13 +30,18 @@
     <div class="parent">
         <div class="card-top">
             <div class="card">
-                <div class="profilepic" data-popup-trigger="orice" onclick="console.log('clicked')">
+                <h1>Your profile</h1>
+                <b class="hr anim"></b>
+                <h3>Change your profile picture</h3>
+                <div class="profilepic" data-popup-trigger="orice">
                     <img class="profilepic__image" src="https://images.unsplash.com/photo-1510227272981-87123e259b17?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=3759e09a5b9fbe53088b23c615b6312e" width="150" height="150" alt="Profibild" />
                     <div class="profilepic__content">
                         <span class="profilepic__icon"><i class="fas fa-camera"></i></span>
                         <span class="profilepic__text">Edit Profile</span>
                     </div>
                 </div>
+                <b class="hr anim"></b>
+                <h3>Change your username</h3>
                 <div class="user-data">
                     <form id="username-form">
                         <label>
@@ -60,15 +66,15 @@
             <div class="card">
                 <div id="checklist">
                     <input id="01" type="checkbox" name="r" value="1" onclick="setCookie('01'); setPreference('01');">
-                    <label for="01">Female actor in a leading role</label>
+                    <label for="01" class="is-unselectable">Female actor in a leading role</label>
                     <input id="02" type="checkbox" name="r" value="2" onclick="setCookie('02'); setPreference('02');">
-                    <label for="02">Male actor in a leading role</label>
+                    <label for="02" class="is-unselectable">Male actor in a leading role</label>
                     <input id="03" type="checkbox" name="r" value="3" onclick="setCookie('03'); setPreference('03');">
-                    <label for="03">Female actor in a supporting role</label>
+                    <label for="03" class="is-unselectable">Female actor in a supporting role</label>
                     <input id="04" type="checkbox" name="r" value="4" onclick="setCookie('04'); setPreference('04');">
-                    <label for="04">Male actor in a supporting role</label>
+                    <label for="04" class="is-unselectable">Male actor in a supporting role</label>
                     <input id="05" type="checkbox" name="r" value="5" onclick="setCookie('05'); setPreference('05');">
-                    <label for="05">Cast in a motion picture</label>
+                    <label for="05" class="is-unselectable">Cast in a motion picture</label>
                 </div>
             </div>
         </div>
