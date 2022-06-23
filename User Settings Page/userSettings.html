@@ -54,10 +54,10 @@
         </div>
         <div class="card-left">
             <div class="card">
-                <div class="news-sources-item" id="firstItem" onclick="setCookie('yahoo', 10)">
+                <div class="news-sources-item" id="firstItem" onclick="setCookie('yahoo', 10); setPreference('yahoo');">
                     <span>Yahoo! News</span>
                 </div>
-                <div class="news-sources-item" id="secondItem" onclick="setCookie('tmz', 10)">
+                <div class="news-sources-item" id="secondItem" onclick="setCookie('tmz', 10); setPreference('tmz');">
                     <span>TMZ News</span>
                 </div>
             </div>
@@ -65,16 +65,16 @@
         <div class="card-right">
             <div class="card">
                 <div id="checklist">
-                    <input id="01" type="checkbox" name="r" value="1" onclick="setCookie('01'); setPreference('01');">
-                    <label for="01" class="is-unselectable">Female actor in a leading role</label>
-                    <input id="02" type="checkbox" name="r" value="2" onclick="setCookie('02'); setPreference('02');">
-                    <label for="02" class="is-unselectable">Male actor in a leading role</label>
-                    <input id="03" type="checkbox" name="r" value="3" onclick="setCookie('03'); setPreference('03');">
-                    <label for="03" class="is-unselectable">Female actor in a supporting role</label>
-                    <input id="04" type="checkbox" name="r" value="4" onclick="setCookie('04'); setPreference('04');">
-                    <label for="04" class="is-unselectable">Male actor in a supporting role</label>
-                    <input id="05" type="checkbox" name="r" value="5" onclick="setCookie('05'); setPreference('05');">
-                    <label for="05" class="is-unselectable">Cast in a motion picture</label>
+                    <input id="category_01" type="checkbox" name="r" value="1" onclick="setCookie('category_01'); setPreference('category_01');">
+                    <label for="category_01" class="is-unselectable">Female actor in a leading role</label>
+                    <input id="category_02" type="checkbox" name="r" value="2" onclick="setCookie('category_02'); setPreference('category_02');">
+                    <label for="category_02" class="is-unselectable">Male actor in a leading role</label>
+                    <input id="category_03" type="checkbox" name="r" value="3" onclick="setCookie('category_03'); setPreference('category_03');">
+                    <label for="category_03" class="is-unselectable">Female actor in a supporting role</label>
+                    <input id="category_04" type="checkbox" name="r" value="4" onclick="setCookie('category_04'); setPreference('category_04');">
+                    <label for="category_04" class="is-unselectable">Male actor in a supporting role</label>
+                    <input id="category_05" type="checkbox" name="r" value="5" onclick="setCookie('category_05'); setPreference('category_05');">
+                    <label for="category_05" class="is-unselectable">Cast in a motion picture</label>
                 </div>
             </div>
         </div>

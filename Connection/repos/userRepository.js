@@ -32,37 +32,59 @@ function createUser(user) {
             {
                 user["password"] = cyrb53(user["password"])
                 let sqlQuery =  "insert into Awards.Persons (username, pass, email) values('" + user["username"] + "', '" + user['password'] + "', '" + user["email"] + "')";
-                console.log(sqlQuery)
                 connection.query(sqlQuery,
                     function (err, result, fields) {
                         if (err) throw err;
-                        resolve(result);
+
+                        connection.query("insert into Awards.Preferences (person_id, tmz, yahoo, category_01, category_02, category_03, category_04, category_05) " + 
+                        "values((select id from Awards.Persons where email='" + user["email"] +  "'), 0, 0, 0, 0, 0, 0, 0)", 
+                        function(err_insert, result_insert, fields) {
+                            if (err_insert) throw err_insert;
+                            resolve("User created!");
+
+                        } )
+                        })} else console.log("failed")
                     }
                 );
-            }
-            else console.log("failed")
-        })
-        });
+            })
 }
 
 function checkUser(userObj) {
     const password = userObj['password']
     const email = userObj['email']
+
     return new Promise((resolve, reject) => {
         let flag = false
-        for (let user of users) {
-            if (user['email'] === email) {
-                if (cyrb53(password).toString() == user['password']) {
-                    flag = true
-                    resolve(user)
-                    break
-                }
-            }
-        }
+        let sqlQuery = "select * from Persons where email='" + email + "'"
+        connection.query(sqlQuery, 
+            function (err, result, fields) {
+                if(err) throw err;
+                res = JSON.parse(JSON.stringify(result[0]))
 
-        if (flag === false) {
-            resolve('not found')
-        }
+                if(res["pass"] == cyrb53(password).toString())
+                {
+                    let prefsQuery = new Promise((resolve) => {
+                        connection.query("select tmz, yahoo, category_01, category_02, category_03, category_04, category_05 from preferences where person_id=" + res["id"],
+                    function (err_pref, result_pref, fields) {
+                        if(err_pref) throw err_pref;
+
+                        if(typeof result_pref[0] !== 'undefined') {
+                            res_pref = JSON.parse(JSON.stringify(result_pref[0]))
+                            for (const key of Object.keys(res_pref)) {
+                                res[key] = res_pref[key]
+                            }
+                        }
+                        resolve(res)
+                    })
+                    });
+                
+                    prefsQuery.then(() => {
+                        resolve(res)
+                    })
+                }
+                 else
+                    console.log("nu s-a putut conecta")
+            });
     })
 }
 
@@ -77,12 +99,18 @@ function parseJwt (token) {
 
 function updateUserPreference(body) {
     let jwt = body["jwt"]
+    
     let preference = body["preference"]
     let preferenceValue = body["value"]
 
     // console.log(jwt + " " + preference + " " + preferenceValue)
     let parsedJwt = parseJwt(jwt)
     let userId = parsedJwt["id"]
+
+    connection.query("UPDATE PREFERENCES SET " + preference + "=" + preferenceValue + " WHERE PERSON_ID=" + userId,
+    function (update_err, update_result, fields) {
+        if (update_err) throw update_err
+    })
 }
 
 module.exports = {
