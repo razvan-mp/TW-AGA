@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken")
-const { createUser, checkUser, updateUserPreference } = require("../repos/userRepository");
+const { createUser, checkUser, updateUserPreference, updateUserEmail, updateUserPassword } = require("../repos/userRepository");
 
 async function registerUser(req, res) {
     res.writeHead(200, {
@@ -79,11 +79,49 @@ async function updatePreference(req, res) {
     catch (error) {
         console.log(error)
     }
+}
 
+async function updateEmail(req, res) {
+    let body = "";
+    req.on("data", (chunk) => {
+        body += chunk.toString();
+    });
+
+    req.on("end", () => {
+        let userEmail = JSON.parse(body)[0];
+        updateUserEmail(userEmail).then((r) => {
+            console.log(r)
+            res.writeHead(r, {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers":
+                    "Origin, X-Requested-With, Content-Type, Accept",
+                "Access-Control-Allow-Methods": "POST",
+            })
+            res.end()
+        })
+    });
+
+    
+}
+
+async function updatePassword(req, res) {
+    let body = "";
+    req.on("data", (chunk) => {
+        body += chunk.toString();
+    });
+
+    req.on("end", () => {
+        let userPassword = JSON.parse(body)[0];
+        updateUserPassword(userPassword)
+    });
+    
 }
 
 module.exports = {
     registerUser,
     loginUser,
-    updatePreference
+    updatePreference,
+    updateEmail,
+    updatePassword
 };
