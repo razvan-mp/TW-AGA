@@ -19,13 +19,12 @@ function getCookie(cname) {
 }
 
 function showAllActors() {
-    console.log("show all actors:")
     let cookies = []
-    cookies[0] = parseInt(getCookie("01"))
-    cookies[1] = parseInt(getCookie("02"))
-    cookies[2] = parseInt(getCookie("03"))
-    cookies[3] = parseInt(getCookie("04"))
-    cookies[4] = parseInt(getCookie("05"))
+    cookies[0] = parseInt(getCookie("category_01"))
+    cookies[1] = parseInt(getCookie("category_02"))
+    cookies[2] = parseInt(getCookie("category_03"))
+    cookies[3] = parseInt(getCookie("category_04"))
+    cookies[4] = parseInt(getCookie("category_05"))
 
     let requestCategory = ''
     for (let i = 0; i < 5; i++) {

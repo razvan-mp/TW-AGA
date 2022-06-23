@@ -30,17 +30,6 @@
             <div class="card">
                 <h1>Your profile</h1>
                 <b class="hr anim"></b>
-                <h3>Change your username</h3>
-                <div class="user-data">
-                    <form id="username-form">
-                        <label>
-                            <input type="text" class="user-info-input" id="username" placeholder="Username">
-                        </label>
-                    </form>
-                    <button type="submit" form="username-form" class="submit-info-button"><span>Submit </span></button>
-                </div>
-
-                <b class="hr anim sub"></b>
                 <h3>Choose your news sources</h3>
                 <button class="button anim" id="firstItem" onclick="setCookie('yahoo', 10); setPreference('yahoo')">Yahoo! News</button>
                 <button class="button anim" id="secondItem" onclick="setCookie('tmz', 10); setPreference('tmz')">TMZ</button>
@@ -59,6 +48,30 @@
                     <input id="category_05" type="checkbox" name="r" value="5" onclick="setCookie('category_05'); setPreference('category_05');">
                     <label for="category_05" class="is-unselectable">Cast in a motion picture</label>
                 </div>
+
+                <b class="hr anim sub"></b>
+                <h3>Change your credentials</h3>
+                <div class="user-data">
+                    <div class="change-email">
+                        <form id="email-form" onsubmit="event.preventDefault(); emailHandler()">
+                            <label>
+                                <input type="email" class="user-info-input" name="email" placeholder="New e-mail" required>
+                            </label>
+                            <button type="submit" form="email-form" class="submit-info-button"><span>Submit</span></button>
+                        </form>
+                    </div>
+                    <div class="change-pass">
+                        <form id="password-form" onsubmit="event.preventDefault(); passwordHandler()">
+                            <label>
+                                <input type="password" class="user-info-input" name="pass" placeholder="Password" required>
+                            </label>
+                            <label>
+                                <input type="password" class="user-info-input" name="pass_confirm" placeholder="Confirm password" required>
+                            </label>
+                            <button type="submit" form="password-form" class="submit-info-button"><span>Submit</span></button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -66,6 +79,7 @@
     <script src="js/cookieManager.js"></script>
     <script src="../global_js/jwtParser.js"></script>
     <script src="js/preferenceManager.js"></script>
+    <script src="js/credentialChangeManager.js"></script>
 </body>
 
 </html>
