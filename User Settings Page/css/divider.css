@@ -46,7 +46,7 @@
     background-size: 150px;
     background-position: center;
     z-index: 1;
-    animation: bar 30s linear infinite;
+    animation: bar 80s linear infinite;
 }
 
 .hr.anim:hover:before {
@@ -55,4 +55,9 @@
 
 .hr.anim:hover:after {
     animation-duration: 2s;
+}
+
+.hr.anim.sub {
+    width: 40%;
+    margin-top: 30px;
 }

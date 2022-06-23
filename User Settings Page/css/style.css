@@ -16,6 +16,7 @@ body {
 }
 
 .parent {
+    height: 100%;
     display: grid;
     grid-column-gap: 10px;
     grid-row-gap: 10px;
@@ -27,6 +28,7 @@ body {
     top: 50%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+    margin-top: 40px;
 }
 
 .card-top {
@@ -54,61 +56,6 @@ body {
     align-items: center;
     flex-direction: column;
     display: flex;
-}
-
-.profilepic {
-    position: relative;
-    width: 125px;
-    height: 125px;
-    border-radius: 50%;
-    overflow: hidden;
-    background-color: #111;
-    margin-bottom: 20px;
-}
-
-.profilepic:hover .profilepic__content {
-    opacity: 1;
-}
-
-.profilepic:hover .profilepic__image {
-    opacity: 0.5;
-}
-
-.profilepic__image {
-    object-fit: cover;
-    opacity: 1;
-    transition: opacity 0.2s ease-in-out;
-}
-
-.profilepic__content {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-}
-
-.profilepic__icon {
-    color: white;
-    padding-bottom: 8px;
-}
-
-.fas {
-    font-size: 20px;
-}
-
-.profilepic__text {
-    text-transform: uppercase;
-    font-size: 12px;
-    width: 50%;
-    text-align: center;
 }
 
 .submit-info-button {
@@ -160,86 +107,18 @@ body {
     margin: 20px 20px;
 }
 
-.body-blackout {
-    position: absolute;
-    z-index: 1010;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.65);
-    display: none;
-}
-
-.body-blackout.is-blacked-out {
-    display: block;
-}
-
-.popup-trigger {
-    display: inline-block;
-}
-
-.popup-modal {
-    height: 35vh;
-    width: 50%;
-    background-color: #fff;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    padding: 45px;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 300ms ease-in-out;
-    z-index: 1011;
-    border-radius: 20px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-}
-
-.popup-modal::-webkit-scrollbar {
-    display: none;
-}
-
-.popup-modal.is--visible {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.popup-modal__close {
-    position: absolute;
-    font-size: 1.2rem;
-    right: -10px;
-    top: -10px;
-    cursor: pointer;
-    border-radius: 10px;
-}
-
-.image-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    align-self: center;
-}
-
-.news-sources-item {
-    padding: 10px;
-    border-radius: 10px;
-    background-color: #abd1c6;
-    transition: all 300ms;
-    margin: 10px;
-    width: 80%;
-
-    height: 45px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+.news-preference {
+    width: 30%;
+    padding: 20px;
 }
 
 .item-is-selected {
-    background-color: #f9bc60;
-    transition: all 300ms;
+    border: 1px solid black !important;
+    padding: 17px !important;
+    border-style: inset;
+    color: #566473;
+    background-color: #abd1c6 !important;
+    transition: background-color 400ms ease-in-out;
 }
 
 @media only screen and (max-width: 1300px) {
@@ -256,8 +135,8 @@ body {
 
 .is-unselectable {
     user-select: none;
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .divider {

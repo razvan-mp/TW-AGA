@@ -3,7 +3,7 @@
     --text: #414856;
     --check: #abd1c6;
     --disabled: #c3c8de;
-    --width: 100%;
+    --width: 35%;
     --height: 100%;
     --border-radius: 10px;
     background: var(--background);
@@ -17,6 +17,7 @@
     grid-template-columns: 30px auto;
     align-items: center;
     justify-items: center;
+    margin-top: -20px;
 }
 #checklist label {
     color: var(--text);
