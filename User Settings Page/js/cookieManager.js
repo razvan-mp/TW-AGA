@@ -7,14 +7,17 @@ function setCookie(cname, exdays) {
                 cvalue = 0;
                 let element = document.getElementById('firstItem')
                 element.classList.remove('item-is-selected')
+                element.classList.add('anim')
             } else if (getCookie('yahoo') === '0') {
                 cvalue = 1;
                 let element = document.getElementById('firstItem')
                 element.classList.add('item-is-selected')
+                element.classList.remove('anim')
             } else {
                 cvalue = 1;
                 let element = document.getElementById('firstItem')
                 element.classList.add('item-is-selected')
+                element.classList.remove('anim')
             }
             break
         }
@@ -22,16 +25,19 @@ function setCookie(cname, exdays) {
             // update cookie
             if (getCookie('tmz') === '1') {
                 cvalue = 0;
-                let element = document.getElementById('secondItem')
+                    let element = document.getElementById('secondItem')
                 element.classList.remove('item-is-selected')
+                element.classList.add('anim')
             } else if (getCookie('tmz') === '0' || getCookie('tmz') == undefined) {
                 cvalue = 1;
                 let element = document.getElementById('secondItem')
                 element.classList.add('item-is-selected')
+                element.classList.remove('anim')
             } else {
                 cvalue = 1;
                 let element = document.getElementById('secondItem')
                 element.classList.add('item-is-selected')
+                element.classList.remove('anim')
             }
             break
         }
@@ -39,8 +45,10 @@ function setCookie(cname, exdays) {
         case "category_02":
         case "category_03":
         case "category_04":
-        case "category_05": {
-            if (document.getElementById(cname).checked) {
+        case "category_05":
+        case "category_06": {
+            console.log("cookie")
+            if(document.getElementById(cname).checked) {
                 cvalue = 1;
             }
             else cvalue = 0;
@@ -71,28 +79,30 @@ function getCookie(cname) {
 
 if (getCookie('yahoo') === '1') {
     document.getElementById('firstItem').classList.add('item-is-selected')
+    document.getElementById('firstItem').classList.remove('anim')
 }
 
 if (getCookie('tmz') === '1') {
     document.getElementById('secondItem').classList.add('item-is-selected')
+    document.getElementById('secondItem').classList.remove('anim')
 }
 
-if (getCookie('category_01') === '1') {
+if(getCookie('category_01') === '1') {
     document.getElementById('category_01').checked = 1;
 }
 
-if (getCookie('category_02') === '1') {
+if(getCookie('category_02') === '1') {
     document.getElementById('category_02').checked = 1;
 }
 
-if (getCookie('category_03') === '1') {
+if(getCookie('category_03') === '1') {
     document.getElementById('category_03').checked = 1;
 }
 
-if (getCookie('category_04') === '1') {
+if(getCookie('category_04') === '1') {
     document.getElementById('category_04').checked = 1;
 }
 
-if (getCookie('category_05') === '1') {
+if(getCookie('category_05') === '1') {
     document.getElementById('category_05').checked = 1;
 }

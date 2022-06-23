@@ -8,9 +8,7 @@
     <link type="text/css" rel="stylesheet" href="css/navbar.css">
     <link type="text/css" rel="stylesheet" href="css/checklist.css">
     <link type="text/css" rel="stylesheet" href="css/divider.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/svg-with-js.min.css" rel="stylesheet" />
+    <link type="text/css" rel="stylesheet" href="css/button.css">
 </head>
 
 <body>
@@ -32,15 +30,6 @@
             <div class="card">
                 <h1>Your profile</h1>
                 <b class="hr anim"></b>
-                <h3>Change your profile picture</h3>
-                <div class="profilepic" data-popup-trigger="orice">
-                    <img class="profilepic__image" src="https://images.unsplash.com/photo-1510227272981-87123e259b17?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=3759e09a5b9fbe53088b23c615b6312e" width="150" height="150" alt="Profibild" />
-                    <div class="profilepic__content">
-                        <span class="profilepic__icon"><i class="fas fa-camera"></i></span>
-                        <span class="profilepic__text">Edit Profile</span>
-                    </div>
-                </div>
-                <b class="hr anim"></b>
                 <h3>Change your username</h3>
                 <div class="user-data">
                     <form id="username-form">
@@ -50,20 +39,14 @@
                     </form>
                     <button type="submit" form="username-form" class="submit-info-button"><span>Submit </span></button>
                 </div>
-            </div>
-        </div>
-        <div class="card-left">
-            <div class="card">
-                <div class="news-sources-item" id="firstItem" onclick="setCookie('yahoo', 10); setPreference('yahoo');">
-                    <span>Yahoo! News</span>
-                </div>
-                <div class="news-sources-item" id="secondItem" onclick="setCookie('tmz', 10); setPreference('tmz');">
-                    <span>TMZ News</span>
-                </div>
-            </div>
-        </div>
-        <div class="card-right">
-            <div class="card">
+
+                <b class="hr anim sub"></b>
+                <h3>Choose your news sources</h3>
+                <button class="button anim" id="firstItem" onclick="setCookie('yahoo', 10); setPreference('yahoo')">Yahoo! News</button>
+                <button class="button anim" id="secondItem" onclick="setCookie('tmz', 10); setPreference('tmz')">TMZ</button>
+
+                <b class="hr anim sub"></b>
+                <h3>Choose your homepage filters</h3>
                 <div id="checklist">
                     <input id="category_01" type="checkbox" name="r" value="1" onclick="setCookie('category_01'); setPreference('category_01');">
                     <label for="category_01" class="is-unselectable">Female actor in a leading role</label>
@@ -79,25 +62,8 @@
             </div>
         </div>
     </div>
-    <div id="modals">
-        <div class='popup-modal' data-popup-modal="orice">
-            <i class='popup-modal__close'></i>
-            <h3>Choose your avatar</h3>
-            <div class="image-grid">
-                <img src="media/avatar_1.png" alt="Avatar number 1">
-                <img src="media/avatar_2.png" alt="Avatar number 2">
-                <img src="media/avatar_3.png" alt="Avatar number 3">
-                <img src="media/avatar_4.png" alt="Avatar number 4">
-                <img src="media/avatar_1.png" alt="Avatar number 1">
-                <img src="media/avatar_2.png" alt="Avatar number 2">
-                <img src="media/avatar_3.png" alt="Avatar number 3">
-                <img src="media/avatar_4.png" alt="Avatar number 4">
-            </div>
-        </div>
-    </div>
-
+  
     <script src="js/cookieManager.js"></script>
-    <script src="js/modal.js"></script>
     <script src="../global_js/jwtParser.js"></script>
     <script src="js/preferenceManager.js"></script>
 </body>
