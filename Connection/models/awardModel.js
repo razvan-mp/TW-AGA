@@ -1,10 +1,10 @@
-const connection = require("../database/db");
+const connection = require("../database/db_postgres.js");
 const mysql = require("mysql");
 
 function findActors() {
     return new Promise((resolve, reject) => {
         connection.query(
-            "SELECT DISTINCT NAME FROM Awards.ScreenActorGuildAwards WHERE Name <> '';",
+            "SELECT DISTINCT NAME FROM ScreenActorGuildAwards WHERE Name <> '';",
             function (err, result, fields) {
                 if (err) throw err;
                 resolve(result);
@@ -15,9 +15,9 @@ function findActors() {
 
 function findTopActors() {
     return new Promise((resolve, reject) => {
-        let sql = "SELECT NAME, COUNT(*) As total, sum(case when Won = 'True\\r' then 1 else 0 end) As WonCount FROM " +
-            "awards.ScreenActorGuildAwards GROUP BY NAME HAVING NAME <> '' ORDER BY sum(case when Won = 'True\\r' then " +
-            "1 else 0 end) DESC LIMIT 0, 10;"
+        let sql = "SELECT NAME, COUNT(*) As total, sum(case when Won = 'True' then 1 else 0 end) " + 
+        "As WonCount FROM ScreenActorGuildAwards GROUP BY NAME HAVING NAME <> '' " + 
+        "ORDER BY sum(case when Won = 'True' then 1 else 0 end) DESC LIMIT 10 offset 0;"
         connection.query(sql, function (err, result, fields) {
                 if (err) throw err;
                 resolve(result);
@@ -29,7 +29,7 @@ function findTopActors() {
 function findYearsOfAwardsByActor(name) {
     return new Promise((resolve, reject) => {
         let sql =
-            "SELECT NAME, CAST(LEFT(YEAR, 4) AS SIGNED) AS Year, COUNT(*) AS NumberOfAwards FROM Awards.ScreenActorGuildAwards WHERE Won = 'True' GROUP BY NAME, YEAR HAVING NAME = ?";
+            "SELECT NAME, CAST(LEFT(YEAR, 4) AS INTEGER) AS Year, COUNT(*) AS NumberOfAwards FROM ScreenActorGuildAwards WHERE Won = 'True' GROUP BY NAME, YEAR HAVING NAME = ?";
         const inserts = [name];
         sql = mysql.format(sql, inserts);
         connection.query(sql, function (err, result, fields) {
@@ -66,7 +66,7 @@ function findAll() {
 
 function findAllStats() {
     return new Promise((resolve, reject) => {
-        connection.query("SELECT SUBSTRING_INDEX(YEAR, ' ', 1) AS YEAR, COUNT(*) AS TOTAL, SUM(CASE WHEN WON='True\\r' THEN 1 ELSE 0 END) AS WINS, SUM(CASE WHEN WON='False\\r' THEN 1 ELSE 0 END) AS LOSSES FROM awards.screenactorguildawards GROUP BY YEAR HAVING YEAR LIKE '%-%'", function (err, result, fields) {
+        connection.query("SELECT left(YEAR, 4) AS YEAR, COUNT(*) AS TOTAL, SUM(CASE WHEN WON='True' THEN 1 ELSE 0 END) AS WINS, SUM(CASE WHEN WON='False' THEN 1 ELSE 0 END) AS LOSSES FROM screenactorguildawards GROUP BY YEAR HAVING YEAR LIKE '%-%'", function (err, result, fields) {
             if (err)
                 throw err
             resolve(result)
@@ -76,7 +76,7 @@ function findAllStats() {
 
 function findRandomActors() {
     return new Promise((resolve, reject) => {
-        connection.query("select name from awards.screenactorguildawards where name <> '' and (year like '2020%' or year like '2019%' or year like '2018%') group by name having sum(case when won='True\\r' then 1 else 0 end) > 0 order by rand() limit 0, 10;", function (err, result, fields) {
+        connection.query("select name from screenactorguildawards where name <> '' and (year like '2020%' or year like '2019%' or year like '2018%') group by name having sum(case when won='True' then 1 else 0 end) > 0 order by random() limit 10;", function (err, result, fields) {
             if (err)
                 throw err
             resolve(result)
@@ -142,7 +142,7 @@ function findActorsByCategory(category) {
 
         console.log(sqlQuery)
 
-        connection.query(sqlQuery + " order by rand()", function (err, result, fields) {
+        connection.query(sqlQuery + " order by random()", function (err, result, fields) {
             if (err)
                 throw err
             resolve(result)

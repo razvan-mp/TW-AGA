@@ -1,5 +1,6 @@
 const Awards = require('../models/awardModel')
 
+
 // @desc Gets list actors
 // @route GET /api/actors
 async function getActors(req, res) {
@@ -153,6 +154,7 @@ async function getAllTimeStats(req, res) {
         console.log(error)
     }
 }
+
 
 module.exports = {
     getAwards,

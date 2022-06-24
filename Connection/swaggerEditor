@@ -1,0 +1,360 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "AGA"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+
+basePath: "/api"
+tags:
+- name: "AGA"
+  description: "Everything about Awards"
+paths:
+  /awards:
+    get:
+      tags:
+      - "awards"
+      summary: "Get all the awards"
+      operationId: "getAwards"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Awards"
+  /awards/yearsOfAwards/{name}:
+     get:
+      tags:
+      - "awards"
+      summary: "Get the years when yout actor was awarded"
+      description: ""
+      operationId: "getYearsOfAwardsByActor"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "The name that needs to be fetched."
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/YearsOfAwards"
+        "400":
+          description: "Invalid username supplied"
+        "404":
+          description: "User not found" 
+  /awards/{name}:
+      get:
+        tags:
+        - "awards"
+        summary: "Get informations about you actor"
+        description: ""
+        operationId: "getActor"
+        produces:
+        - "application/json"
+        parameters:
+        - name: "name"
+          in: "path"
+          description: "The name that needs to be fetched."
+          required: true
+          type: "string"
+        responses:
+          "200":
+            description: "successful operation"
+            schema:
+                $ref: "#/definitions/Actor"
+          "400":
+            description: "Invalid username supplied"
+          "404":
+            description: "User not found" 
+  /award/{id}:
+      get:
+        tags:
+        - "awards"
+        summary: "Get informations about you actor"
+        description: ""
+        operationId: "getActorsByCategory"
+        produces:
+        - "application/json"
+        parameters:
+        - name: "id"
+          in: "path"
+          description: "The id of category that needs to be fetched."
+          required: true
+          type: "string"
+        responses:
+          "200":
+            description: "successful operation"
+            schema:
+                $ref: "#/definitions/Actor"
+          "400":
+            description: "Invalid username supplied"
+          "404":
+            description: "User not found" 
+  /topActors:
+      get:
+        tags:
+        - "awards"
+        summary: "Get top 10 actors"
+        description: ""
+        operationId: "getTopActor"
+        produces:
+        - "application/json"
+        responses:
+          "200":
+            description: "successful operation"
+            schema:
+              type: "array"
+              items:
+                $ref: "#/definitions/TopActors"
+  /getAllTimeStats:
+      get:
+        tags:
+        - "awards"
+        summary: "Get all time stats"
+        description: ""
+        operationId: "getAllTimeStats"
+        produces:
+        - "application/json"
+        responses:
+          "200":
+            description: "successful operation"
+            schema:
+              type: "array"
+              items:
+                $ref: "#/definitions/AllTimeStats"
+  /news/yahoo:
+      get:
+        tags:
+        - "news"
+        summary: "Get all news from yahoo"
+        description: ""
+        operationId: "getYahooNews"
+        produces:
+        - "application/json"
+        responses:
+          "200":
+            description: "successful operation"
+            schema:
+              type: "array"
+              items:
+                $ref: "#/definitions/YahooNews"
+  /news/tmz:
+      get:
+        tags:
+        - "news"
+        summary: "Get all news from tmz"
+        description: ""
+        operationId: "getTMZoNews"
+        produces:
+        - "application/json"
+        responses:
+          "200":
+            description: "successful operation"
+            schema:
+              type: "array"
+              items:
+                $ref: "#/definitions/TmzNews"
+                
+  /auth/register:              
+      post:
+        tags:
+        - "auth"
+        summary: "Register user"
+        operationId: "registerUser"
+        produces:
+        - "application/json"
+        parameters:
+        - in: "body"
+          name: "body"
+          description: "Register user object"
+          required: true
+          schema:
+            $ref: "#/definitions/User"
+        responses:
+          default:
+            description: "successful operation"
+            
+  /auth/login:
+    post:
+      tags:
+      - "auth"
+      summary: "Logs user into the system"
+      description: ""
+      operationId: "loginUser"
+      produces:
+      - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Register user object"
+          required: true
+          schema:
+            $ref: "#/definitions/UserLogin"
+      responses:
+        "200":
+          description: "successful operation"
+        "401":
+          description: "User does not exist."
+          
+  /preference:
+    post:
+        tags:
+        - "auth"
+        summary: "Update preference"
+        operationId: "updatePreference"
+        produces:
+        - "application/json"
+        parameters:
+        - in: "body"
+          name: "body"
+          description: "Register user object"
+          required: true
+          schema:
+            $ref: "#/definitions/UserPreference"
+        responses:
+          default:
+            description: "successful operation"
+  
+definitions:
+  YearsOfAwards:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        description: "The name of the actor"
+      year:
+        type: "integer"
+        format: "int32"
+        description: "The year when he was awarded"
+      numberOfAwards:
+        type: "integer"
+        format: "int32"
+        description: "The number of awards"
+  Actor:
+    type: "object"
+    properties:
+      year:
+        type: "string"
+        description: "The year when he was awarded"
+      category:
+        type: "string"
+      name:
+        type: "string"
+        description: "The name of the actor"
+      showName:
+        type: "string"
+        description: "The name of the show"
+      won:
+        type: "boolean"
+        default: "false"
+  TopActors:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        description: "The name of the actor"
+      year:
+        type: "integer"
+        format: "int32"
+        description: "The number of nominations"
+      numberOfAwards:
+        type: "integer"
+        format: "int32"
+        description: "The number of awards"  
+  AllTimeStats:
+    type: "object"
+    properties:
+      year:
+        type: "string"
+        description: "The year"
+      total:
+        type: "integer"
+        format: "int32"
+        description: "The number of nominations"
+      numberOfWins:
+        type: "integer"
+        format: "int32"
+        description: "The number of wins" 
+      numberOfLosses:
+        type: "integer"
+        format: "int32"
+        description: "The number of losses"
+  Awards:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int32"
+      year:
+        type: "string"
+      category:
+        type: "string"
+      name:
+        type: "string"
+        description: "The name of the actor"
+      showName:
+        type: "string"
+        description: "The name of the show"
+      won:
+        type: "boolean"
+        default: "false"
+  YahooNews:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+      readMoreLink:
+        type: "string"
+      imageLink:
+        type: "string"
+  TmzNews:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+      readMoreLink:
+        type: "string"
+      imageLink:
+        type: "string"
+        
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      username:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+        description: "User Status"
+  UserLogin:
+    type: "object"
+    properties:
+      email:
+        type: "string"
+      password:
+        type: "string"
+        description: "User Status"
+  UserPreference:
+    type: "object"
+    properties:
+      jwt:
+        type: "string"
+      preference:
+        type: "string"
+      value:
+        type: "string"      
+  
