@@ -24,18 +24,18 @@ const cyrb53 = function (str, seed = 0) {
 
 function createUser(user) {
     return new Promise((resolve, reject) => {
-        connection.query("select * from Awards.Persons where email='" + user["email"] + "'",
+        connection.query("select * from Persons where email='" + user["email"] + "'",
             function (err, result) {
                 if (err) throw err;
                 if (typeof result[0] === 'undefined') {
                     user["password"] = cyrb53(user["password"])
-                    let sqlQuery = "insert into Awards.Persons (username, pass, email) values('" + user["username"] + "', '" + user['password'] + "', '" + user["email"] + "')";
+                    let sqlQuery = "insert into Persons (username, pass, email) values('" + user["username"] + "', '" + user['password'] + "', '" + user["email"] + "')";
                     connection.query(sqlQuery,
                         function (err, result, fields) {
                             if (err) throw err;
 
-                            connection.query("insert into Awards.Preferences (person_id, tmz, yahoo, category_01, category_02, category_03, category_04, category_05) " +
-                                "values((select id from Awards.Persons where email='" + user["email"] + "'), 0, 0, 0, 0, 0, 0, 0)",
+                            connection.query("insert into Preferences (person_id, tmz, yahoo, category_01, category_02, category_03, category_04, category_05) " +
+                                "values((select id from Persons where email='" + user["email"] + "'), 0, 0, 0, 0, 0, 0, 0)",
                                 function (err_insert, result_insert, fields) {
                                     if (err_insert) throw err_insert;
                                     resolve("created");
