@@ -19,19 +19,18 @@
     </header>
     
     <label class='input-container closed'>
-        <div class='shadow'></div>
-        <div class='center'>
+        <span class='center'>
             <input id='search' type='text' class='input' placeholder='Search actor'>
-        </div>
-        <div class='sticks'></div>
+        </span>
+        <span class='sticks'></span>
     </label>
     
-    <section class='actors'>
+    <div class='actors'>
         <ul id='actors'>
         </ul>
-    </section>
+    </div>
     
-    <button class="scrollToTopBtn">&#8679</button>
+    <button class="scrollToTopBtn">&#8679;</button>
     
     <div id='modals'>
     </div>
@@ -56,7 +55,8 @@
             scrollToTop()
         }
         </script>
+    <script src='js/scrollListener.js'></script>
+    <script src="../global_js/navbarManager.js"></script>
 </body>
-<script src='js/scrollListener.js'></script>
-<script src="../global_js/navbarManager.js"></script>
+
 </html>

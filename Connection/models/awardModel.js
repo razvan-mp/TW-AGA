@@ -1,4 +1,4 @@
-const connection = require("../database/db");
+const connection = require("../database/db_postgres.js");
 const mysql = require("mysql");
 
 function findActors() {

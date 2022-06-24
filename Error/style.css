@@ -14,7 +14,7 @@ body {
     color: black;
 }
 
-.container h1{
+.container {
     font-size: 160px;
     margin: 0;
     font-weight: 900;
@@ -24,7 +24,7 @@ body {
     -webkit-background-clip: text;
 }
 
-.container a{
+.container a {
     text-decoration: none;
     background: #e55039aa;
     color: #fff;
@@ -45,18 +45,16 @@ body {
         width: 50%;
         position: absolute;
         top: 50%;
-        transform: translateY(-50%);
-        transform: translateX(50%);
+        transform: translate(50%, -50%);
         text-align: center;
         color: black;
     }
     
-    .container h1{
+    .container {
         font-size: 40px;
         margin: 0;
-        font-weight: 450;
+        font-weight: 400;
         letter-spacing: 10px;
-        background: url(palm.jpg) center;
         -webkit-text-fill-color: transparent;
         -webkit-background-clip: text;
     }
