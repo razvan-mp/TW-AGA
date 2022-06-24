@@ -18,7 +18,7 @@ async function emailHandler() {
             document.getElementById('email-form').innerHTML += "<div class='msg-box' style='padding: 10px;background: rgba(75, 255, 75, 0.353); margin: 5px;'><p>Changed successfully!</p></div>";
             await delay(3000)
             form.innerHTML = formText
-        } else {
+        } else if (this.readyState === 4 && this.status === 401) {
             const formText = form.innerHTML;
             document.getElementById('email-form').innerHTML += "<div class='msg-box' style='padding: 10px;background: rgba(253, 64, 64, 0.292); margin: 5px;'><p>Email already taken!</p></div>";
             await delay(3000)
@@ -46,7 +46,12 @@ async function passwordHandler() {
         request.onreadystatechange = async function () {
             if (this.readyState === 4 && this.status === 200) {
                 const formText = form.innerHTML;
-                document.getElementById('email-form').innerHTML += "<div class='msg-box' style='padding: 10px;background: rgba(75, 255, 75, 0.353); margin: 5px;'><p>Changed successfully!</p></div>";
+                document.getElementById('password-form').innerHTML += "<div class='msg-box' style='padding: 10px;background: rgba(75, 255, 75, 0.353); margin: 5px;'><p>Changed successfully!</p></div>";
+                await delay(3500)
+                form.innerHTML = formText
+            } else if (this.readyState === 4 && this.status === 401) {
+                const formText = form.innerHTML;
+                document.getElementById('password-form').innerHTML += "<div class='msg-box' style='padding: 10px;background: rgba(253, 64, 64, 0.292); margin: 5px;'><p>Could not change password!</p></div>";
                 await delay(3500)
                 form.innerHTML = formText
             }

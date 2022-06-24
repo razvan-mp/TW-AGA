@@ -54,35 +54,38 @@ function checkUser(userObj) {
     const email = userObj['email']
 
     return new Promise((resolve, reject) => {
-        let flag = false
         let sqlQuery = "select * from Persons where email='" + email + "'"
         connection.query(sqlQuery,
             function (err, result, fields) {
                 if (err) throw err;
-                res = JSON.parse(JSON.stringify(result[0]))
+                if (typeof result[0] !== 'undefined') {
+                    res = JSON.parse(JSON.stringify(result[0]))
 
-                if (res["pass"] == cyrb53(password).toString()) {
-                    let prefsQuery = new Promise((resolve) => {
-                        connection.query("select tmz, yahoo, category_01, category_02, category_03, category_04, category_05 from preferences where person_id=" + res["id"],
-                            function (err_pref, result_pref, fields) {
-                                if (err_pref) throw err_pref;
+                    if (res["pass"] == cyrb53(password).toString()) {
+                        let prefsQuery = new Promise((resolvePref) => {
+                            connection.query("select tmz, yahoo, category_01, category_02, category_03, category_04, category_05 from preferences where person_id=" + res["id"],
+                                function (err_pref, result_pref, fields) {
+                                    if (err_pref) throw err_pref;
 
-                                if (typeof result_pref[0] !== 'undefined') {
-                                    res_pref = JSON.parse(JSON.stringify(result_pref[0]))
-                                    for (const key of Object.keys(res_pref)) {
-                                        res[key] = res_pref[key]
+                                    if (typeof result_pref[0] !== 'undefined') {
+                                        res_pref = JSON.parse(JSON.stringify(result_pref[0]))
+                                        for (const key of Object.keys(res_pref)) {
+                                            res[key] = res_pref[key]
+                                        }
                                     }
-                                }
-                                resolve(res)
-                            })
-                    });
+                                    resolvePref(res)
+                                })
+                        });
 
-                    prefsQuery.then(() => {
-                        resolve(res)
-                    })
+                        prefsQuery.then((response) => {
+                            resolve(res)
+                        })
+                    }
+                    else
+                        resolve('not found')
+                } else {
+                    resolve('user not existent')
                 }
-                else
-                    console.log("nu s-a putut conecta")
             });
     })
 }
@@ -113,18 +116,23 @@ function updateUserPreference(body) {
 }
 
 function updateUserPassword(body) {
-    let jwt = body["jwt"]
-    let password = body["pass"]
+    return new Promise((resolve) => {
+        let jwt = body["jwt"]
+        let password = body["pass"]
 
-    let parsedJwt = parseJwt(jwt)
-    let userId = parsedJwt["id"]
+        let parsedJwt = parseJwt(jwt)
+        let userId = parsedJwt["id"]
 
-    connection.query("UPDATE Persons SET pass" + "='" + cyrb53(password) + "' WHERE ID=" + userId,
-        function (update_err, update_result, fields) {
-            if (update_err) throw update_err
+        connection.query("UPDATE Persons SET pass" + "='" + cyrb53(password) + "' WHERE ID=" + userId,
+            function (update_err, update_result, fields) {
+                if (update_err) {
+                    resolve(401)
+                    throw update_err
+                }
 
-            return 200
-        })
+                resolve(200)
+            })
+    })
 }
 
 function updateUserEmail(body) {

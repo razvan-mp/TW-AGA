@@ -90,7 +90,6 @@ async function updateEmail(req, res) {
     req.on("end", () => {
         let userEmail = JSON.parse(body)[0];
         updateUserEmail(userEmail).then((r) => {
-            console.log(r)
             res.writeHead(r, {
                 "Content-Type": "application/json",
                 "Access-Control-Allow-Origin": "*",
@@ -113,7 +112,16 @@ async function updatePassword(req, res) {
 
     req.on("end", () => {
         let userPassword = JSON.parse(body)[0];
-        updateUserPassword(userPassword)
+        updateUserPassword(userPassword).then((r) => {
+            res.writeHead(r, {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers":
+                    "Origin, X-Requested-With, Content-Type, Accept",
+                "Access-Control-Allow-Methods": "POST",
+            })
+            res.end()
+        })
     });
     
 }
