@@ -22,7 +22,6 @@ async function getYahooNews(req, res) {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
         })
-        console.log(dict)
         res.end(JSON.stringify(dict))
 
     } catch (error) {
@@ -51,7 +50,6 @@ async function getTMZNews(req, res) {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
         })
-        console.log(dict)
         res.end(JSON.stringify(dict))
 
     } catch (error) {

@@ -2,31 +2,14 @@ const http = require("http");
 const {
   getAwards,
   getTopActors,
-  getYearsOfAwardsByActor,
-  getActors,
-  getAward,
-  createAward,
-  updateAward,
   getActor,
   getAllTimeStats,
   getActorsByCategory,
 } = require("./controller/awardController");
 const { getYahooNews, getTMZNews } = require("./controller/newsController");
-const { updatePreference, registerUser, loginUser, updatePassword, updateEmail } = require("./controller/userController")
+const { updatePreference, registerUser, loginUser, updatePassword, updateEmail } = require("./controller/authController")
 
 const server = http.createServer((req, res) => {
-  // if(req.url === '/api/awards' && req.method === 'GET') {
-  //     getAwards(req, res)
-
-  // } else if(req.url.match(/\/api\/awards\/([0-9]+)/) && req.method === 'GET') {
-  //     const id = req.url.split('/')[3]
-  //     getAward(req, res, id)
-  // } else if(req.url === '/api/awards' && req.method === 'POST') {
-  //     createAward(req, res)
-  // } else if(req.url.match(/\/api\/awards\/([0-9]+)/) && req.method === 'PUT') {
-  //     const id = req.url.split('/')[3]
-  //     updateAward(req, res, id)
-  // } else
   if (req.url === "/api/awards" && req.method === "GET") {
     getAwards(req, res).then((r) => {
       return r;

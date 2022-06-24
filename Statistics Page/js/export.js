@@ -419,7 +419,6 @@ function newUtil() {
             }
 
             function fail(message) {
-                console.error(message);
                 resolve('');
             }
         });

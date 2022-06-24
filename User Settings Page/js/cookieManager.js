@@ -47,7 +47,6 @@ function setCookie(cname, exdays) {
         case "category_04":
         case "category_05":
         case "category_06": {
-            console.log("cookie")
             if(document.getElementById(cname).checked) {
                 cvalue = 1;
             }
@@ -59,7 +58,6 @@ function setCookie(cname, exdays) {
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     let expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    // console.log(document.cookie)
 }
 
 function getCookie(cname) {

@@ -42,7 +42,6 @@ function showAllActors() {
     xmlHttp.send();
 
     xmlHttp.onreadystatechange = function () {
-        console.log("in function")
         if (this.readyState === 4 && this.status === 200) {
             actorList = JSON.parse(xmlHttp.responseText)
             const actorsSection = document.getElementById('actors')
@@ -182,7 +181,6 @@ showAllActors()
 function searchActor() {
     const requestURL = 'http://localhost:5000/api/awards/'
     let inputValue = document.getElementById('search').value.toLowerCase();
-    console.log("numele actorului: " + inputValue)
 
     let htmlRequestTMDB = new XMLHttpRequest();
     htmlRequestTMDB.open('GET', requestURL + inputValue, true);

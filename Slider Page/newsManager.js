@@ -1,12 +1,8 @@
 function showYahooNews() {
   return new Promise((resolve, reject) => {
     if (getCookie("yahoo") !== "1" && getCookie("tmz") === "1") {
-      console.log(
-        "tmz: " + getCookie("tmz") + " hehe yahoo: " + getCookie("yahoo")
-      );
       resolve("");
     } else {
-      console.log("showing yahoo...");
       let requestURL = "http://localhost:5000/api/news/yahoo";
       let request = new XMLHttpRequest();
       request.open("GET", requestURL, true);
@@ -14,7 +10,6 @@ function showYahooNews() {
       request.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
           let newsList = JSON.parse(request.responseText);
-          console.log(newsList);
 
           const slider = document.getElementById("slider");
           for (let i = 0; i < newsList.length; i++)
@@ -60,12 +55,8 @@ function showYahooNews() {
 function showTMZNews() {
   return new Promise((resolve, reject) => {
     if (getCookie("tmz") !== "1" && getCookie("yahoo") === "1") {
-      console.log(
-        "tmz: " + getCookie("tmz") + " hehe yahoo: " + getCookie("yahoo")
-      );
       resolve("");
     } else {
-      console.log("showing tmz...");
 
       let requestURL = "http://localhost:5000/api/news/tmz";
       let request = new XMLHttpRequest();
@@ -74,7 +65,6 @@ function showTMZNews() {
       request.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
           let newsList = JSON.parse(request.responseText);
-          console.log(newsList);
 
           const slider = document.getElementById("slider");
           for (let i = 0; i < newsList.length; i++)

@@ -10,8 +10,6 @@ function findYahooNews(actorName) {
         let requestURL = ""
 
         requestURL += baseYahooURL + actorName;
-        console.log(actorName)
-        console.log(requestURL)
 
         var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
         var xmlHttp = new XMLHttpRequest();
@@ -67,8 +65,6 @@ function findTMZNews(actorName) {
         let requestURL = ""
 
         requestURL += baseTMZURL + actorName;
-        console.log(actorName)
-        console.log(requestURL)
 
         var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
         var xmlHttp = new XMLHttpRequest();
@@ -107,7 +103,6 @@ function findTMZNews(actorName) {
                     };
                     dict.push(obj)
                 }
-                console.log(dict)
                 resolve(dict)
             }
             else resolve(dict)

@@ -186,8 +186,6 @@ function getAllYearStats() {
 }
 
 getAllYearStats().then(r => {
-    console.log(r)
-
     let lineChart = new Chart("won-chart", {
         type: "line",
         data: {

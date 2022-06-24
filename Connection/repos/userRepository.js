@@ -27,7 +27,6 @@ function createUser(user) {
         connection.query("select * from Awards.Persons where email='" + user["email"] + "'",
             function (err, result) {
                 if (err) throw err;
-                resolve(result);
                 if (typeof result[0] === 'undefined') {
                     user["password"] = cyrb53(user["password"])
                     let sqlQuery = "insert into Awards.Persons (username, pass, email) values('" + user["username"] + "', '" + user['password'] + "', '" + user["email"] + "')";
@@ -39,11 +38,11 @@ function createUser(user) {
                                 "values((select id from Awards.Persons where email='" + user["email"] + "'), 0, 0, 0, 0, 0, 0, 0)",
                                 function (err_insert, result_insert, fields) {
                                     if (err_insert) throw err_insert;
-                                    resolve("User created!");
+                                    resolve("created");
 
                                 })
                         })
-                } else console.log("failed")
+                } else resolve("duplicate")
             }
         );
     })
@@ -84,7 +83,7 @@ function checkUser(userObj) {
                     else
                         resolve('not found')
                 } else {
-                    resolve('user not existent')
+                    resolve('not existent')
                 }
             });
     })
@@ -105,7 +104,6 @@ function updateUserPreference(body) {
     let preference = body["preference"]
     let preferenceValue = body["value"]
 
-    // console.log(jwt + " " + preference + " " + preferenceValue)
     let parsedJwt = parseJwt(jwt)
     let userId = parsedJwt["id"]
 
@@ -140,7 +138,6 @@ function updateUserEmail(body) {
         let jwt = body["jwt"]
         let email = body["email"]
 
-        // console.log(jwt + " " + preference + " " + preferenceValue)
         let parsedJwt = parseJwt(jwt)
         let userId = parsedJwt["id"]
 
