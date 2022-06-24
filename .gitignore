@@ -2,3 +2,6 @@ Connection/node_modules/
 node_modules/
 node_modules/.package-lock.json
 node_modules/.package-lock.json
+.idea/inspectionProfiles/Project_Default.xml
+Login Page with Navbar/.idea/workspace.xml
+*.xml
