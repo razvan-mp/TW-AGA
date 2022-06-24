@@ -42,14 +42,14 @@
         <p>
             Aplicatia Web AGA, detaliata in acest document, creeaza un spatiu pentru utilizator in care
             acesta poate grupa, vedea si gestiona datele despre actorii nominalizati la Screen Actors Guild
-            Awards (SAG). Astfel utilizatorul poate aceesa mai rapid si mai comod subiectele sale de interes.
+            Awards (SAG), dar poate vedea si statistici despre acestia. Astfel utilizatorul poate aceesa mai rapid si mai comod subiectele sale de interes.
         </p>
     </section>
     <section id="scope">
         <h3>Viziune</h3>
         <p>
             Aplicatia isi propune sa faca usor accesibile datele despre actori pentru un user obisnuit, 
-            date accesibile pana acum doar prin intermediul unui fisier <i>csv</i>, oferind o interfata
+            date accesibile pana acum doar prin intermediul unui fisier <em>CSV</em>, oferind o interfata
             intuitiva si accesibila.
         </p>
     </section>
@@ -64,10 +64,9 @@
         <p>
             Mai jos sunt functionalitatile pe care aplicatia AGA le ofera.
         <ul>
-            <li> ? Crearea unui cont si inregistrarea unui utilizator</li>
-            <li> ? Modificarea datelor asociate utilizatorului</li>
-            <li> ? Alegerea topicelor preferate</li>
-            <li>Schimbarea temei site-ului</li>
+            <li>Crearea unui cont si inregistrarea unui utilizator</li>
+            <li>Modificarea datelor asociate utilizatorului</li>
+            <li>Alegerea topicelor preferate</li>
             <li>Vizualizarea stirilor despre actorii nominalizati la SAG</li>
             <li>Cautarea unui actor dupa nume</li>
             <li>Vizualizarea informatiilor despre actorul cautat</li>
@@ -103,11 +102,6 @@
             telefonului al carui ecran este de dimensiuni mai reduse, oferind in continuare o experienta
             placuta utilizatorului datorita design-ului responsive.
         </p>
-        <p>
-            De asemenea utilizatorul are posibilitatea sa modifice tema de culori prestabilita a aplicatiei,
-            putand opta pentru o tema intunecata, acest lucru este posibil prin icon-ul din
-            bara de navigare.
-        </p>
     </section>
 
     <section id="software interfaces">
@@ -118,14 +112,10 @@
             cu un rating general bun.
         </p>
         <p>
-            Baza de date folosita este MySql deoarece se poate integra usor cu limbajul de programare pentru
-            partea de backend. 
+            Baza de date folosita este PostgreSQL deoarece se poate integra usor cu limbajul de programare pentru
+            partea de backend.
             ?Un alt motiv fiind suportul gratuit pe platforma OracleCloud, locul unde va fi hostat
             backend-ul aplicatiei.
-        </p>
-        <p>
-            Pentru hostarea partii de frontend se va folosi platforma oferita de Google si anume Firebase.
-            Aceasta este foarte usor de folsoit si este gratuita oferind posibiliatea adaugarii unui domeniu custom.
         </p>
         <p>
             Frontend-ul va fi scris in HTML5, CSS3 si Javascript fara a folosi alte librarii. Pentru o experianta mai
@@ -140,7 +130,7 @@
         <h3>Interfete de comunicare</h3>
         <p>
             Partea de backend va functiona ca si un REST API, iar partea de frontend va face requesturi catre acesta.
-            ?Formatul de primire/transmitere al requesturilor va fi CSV.
+            Formatul de primire/transmitere al requesturilor va fi XML.
         </p>
     </section>
 
@@ -175,16 +165,13 @@
     <section id="user-settings">
         <h3>Setarile Utilizatorului</h3>
         <p>
-            Utilizatorul va putea accesa setari asociate contului sau. Astfel el va putea schimba parola, modifica
-            mailul si alte informatii referitoare la contul personal. Tot in pagina de setari va putea alege preferintele
-            referitoare la sursele de stiri dar si la categoriile din care sa se faca selectia. Pentru a alege o alta poza a 
-            contului, utilizatorul poate apasa pe butonul "Change avatar", care va deschide un pop-up cu cei 8 avatari pe care
-            ii ofera aplicatia. Odata ce a selectat avatarul dorit, poate apasa pe butonul "Apply". Daca nu vrea sa salveze setarile,
-            utilizatorul poate apasa pe butonul "Cancel", sau oriunde in afara pop-up-ului. Setarile de cont cum ar fi username-ul,
-            emailul, parola se salveaza prin apasarea butonului "Submit" pentru fiecare in parte. Setarile legate de preferinte,
-            din partea dreapta a ecranului se salveaza automat la iesirea din pagina. 
+            Utilizatorul va putea accesa setari asociate contului sau. Astfel, el isi va putea modifica e-mailul, parola 
+            si preferintele de pe site. Acesta va putea alege intre doua site-uri de stiri: Yahoo! News, TMZ si categoriile din
+            care sa apartina actorii (female/male leading role, female/male supporting role, cast in a motion picture). Setarile 
+            implicite sunt: toate categoriile si ambele site-uri de stiri. Categoriile sunt alese printr-un checklist. In momentul in
+            care o preferinta este selectata, ea va fi taiata din lista si in dreptul ei va aparea o bifa.
 
-            <img style="height:459px;width:816px;" class="image" alt="login" src="img/settings.png">
+            <img style="height:459px;width:816px;" class="image" alt="login" src="img/profileSettings.png">
         </p>
     </section>
 
@@ -192,9 +179,13 @@
         <h3>Pagina de stiri</h3>
         <p>
             Utilizatorul va vedea stiri despre actorii nominalizati la SAG intr-o pagina in format 
-            carousel, avand "auto-scroll" sau scroll manual intre stiri; fiecare stire va avea un buton de "Read More",
-            unde va putea citi stirea in intregime despre actorul respectiv.
-            <img style="height:459px;width:816px;" class="image" alt="login" src="img/news.png">
+            carousel, avand "auto-scroll" sau scroll manual intre stiri; apasand pe titlu, utilizatorul poate sa vada in 
+            intregime stirea respectiva. 
+            Stirile sunt luate de pe 2 site-uri: Yahoo! News si TMZ. Utilizatorul logat poate selecta doar una din ele, sau 
+            pe amandoua (setarea implicita). Pana cand se vor incarca stirile, va aparea o animatie "Fetching news":
+            <img style="height:459px;width:816px;" class="image" alt="fetching_news" src="img/fetchingNews.png">
+            <img style="height:459px;width:816px;" class="image" alt="news" src="img/news.png">
+            
         </p>
     </section>
 
@@ -204,9 +195,11 @@
             Utilizatorul va vedea statistici referitoare la <i>Cei mai premiati actori</i>, <i>Procentul de premii castigate</i>,
             <i>Numarul de total de nominalizari</i>, <i>Numarul de total de castigatori</i> si <i>Numarul de total de pierzatori</i> printr-o interfata primitoare. El va putea sa exporte staticticile oferite in 
             3 formate si anume <i>CSV</i>, <i>WebP</i> si <i>SVG</i> prin apasarea butonului "Exporta ca" si 
-            alegerea unui format.
+            alegerea unui format. Statisticile sunt prezentate in diferite maniere sugestive (bar charts, pie charts, plot charts).
 
-            <img style="height:459px;width:816px;" class="image" alt="login" src="img/statistics.png">
+            <img style="height:459px;width:816px;" class="image" alt="statistics01" src="img/statistics01.png">
+            <img style="height:459px;width:816px;" class="image" alt="statistics02" src="img/statistics02.png">
+            <img style="height:459px;width:816px;" class="image" alt="statistics03" src="img/statistics03.png">
         </p>
     </section>
 
@@ -244,7 +237,7 @@
         <h3>Structurarea codului</h3>
         <p>
             Aplicatia se va folosi de arhitectura MVC; modelul se va ocupa cu datele din baza 
-            de date MySql, controller-ul va face request-urile, iar view-ul va prezenta rezultatul.
+            de date PostgreSQL, controller-ul va face request-urile, iar view-ul va prezenta rezultatul.
         </p>
         <img style="height:315;width:816px;" class="image" alt="login" src="img/diagrama_mvc.png">
         <p>
