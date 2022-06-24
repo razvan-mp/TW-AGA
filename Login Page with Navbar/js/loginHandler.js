@@ -51,6 +51,7 @@ async function handleLogIn() {
             setCookie("category_03", jwt["category_03"])
             setCookie("category_04", jwt["category_04"])
             setCookie("category_05", jwt["category_05"])
+            window.location.replace("../Home%20page/index.html")
         } else if (this.readyState === 4 && this.status === 401) {
             const formText = document.getElementById('log-in-form').innerHTML
             if (this.responseText == "\"not existent\"") {
